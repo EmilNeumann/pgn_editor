@@ -4,8 +4,10 @@
 import functools
 import io
 import itertools
+import random
 
 import chess
+import chess.pgn
 import chess.svg
 import pygame
 
@@ -51,13 +53,11 @@ def main():
     pygame.init()
     window = pygame.display.set_mode((SIZE, SIZE))
     
-    board = chess.Board()
-    board.push_san("e4")
-    board.push_san("e5")
-    board.push_san("Nf3")
-    board.push_san("Nc6")
-    board.push_san("Bb5")
-    board.push_san("f5")
+    with open('test.pgn') as f:
+        game = chess.pgn.read_game(f)
+    
+    board = game.board()
+    node = game
     
     orientation = chess.BLACK
     
@@ -68,7 +68,19 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-            # print(event)
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_f:
+                    orientation = not orientation
+                    draw_board(board, orientation)
+                if event.key == pygame.K_LEFT:
+                    node = node.parent or node
+                    board = node.board()
+                    draw_board(board, orientation)
+                if event.key == pygame.K_RIGHT:
+                    if node.variations:
+                        node = random.choice(node.variations)
+                    board = node.board()
+                    draw_board(board, orientation)
         pygame.display.flip()
     pygame.quit()
 
