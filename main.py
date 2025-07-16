@@ -33,9 +33,45 @@ def get_coordinates(file_index, rank_index, orientation, border):
     return x, y
 
 
-def draw_board(board, orientation):
+def get_color_from_nags(nags: set[int]) -> str:
+    if not nags:
+        return "green"
+    if len(nags) > 1:
+        return "#ff00ff"
+    if chess.pgn.NAG_GOOD_MOVE in nags:
+        return "blue"
+    if chess.pgn.NAG_MISTAKE in nags:
+        return "#ff8000"
+    if chess.pgn.NAG_BRILLIANT_MOVE in nags:
+        return "#00ffff"
+    if chess.pgn.NAG_BLUNDER in nags:
+        return "red"
+    if chess.pgn.NAG_SPECULATIVE_MOVE in nags:
+        return "#80ff00"
+    if chess.pgn.NAG_DUBIOUS_MOVE in nags:
+        return "yellow"
+    return "#ff00ff"
+
+
+def draw(node, orientation):
     window = pygame.display.get_surface()
-    board_svg = chess.svg.board(board, orientation=orientation, size=SIZE)
+    board = node.board()
+    arrows = []
+    if len(node.variations) > 1:
+        for child_node in node.variations:
+            arrows.append(
+                chess.svg.Arrow(
+                    child_node.move.from_square,
+                    child_node.move.to_square,
+                    color=get_color_from_nags(child_node.nags)
+                )
+            )
+    board_svg = chess.svg.board(
+        board,
+        orientation=orientation,
+        arrows=arrows,
+        size=SIZE
+    )
     buffer = io.BytesIO(board_svg.encode())
     board_surface = pygame.image.load(buffer)
     window.blit(board_surface, (0, 0))
@@ -56,12 +92,11 @@ def main():
     with open('test.pgn') as f:
         game = chess.pgn.read_game(f)
     
-    board = game.board()
     node = game
     
     orientation = chess.BLACK
     
-    draw_board(board, orientation)
+    draw(node, orientation)
     
     running = True
     while running:
@@ -71,16 +106,14 @@ def main():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_f:
                     orientation = not orientation
-                    draw_board(board, orientation)
+                    draw(node, orientation)
                 if event.key == pygame.K_LEFT:
                     node = node.parent or node
-                    board = node.board()
-                    draw_board(board, orientation)
+                    draw(node, orientation)
                 if event.key == pygame.K_RIGHT:
                     if node.variations:
                         node = random.choice(node.variations)
-                    board = node.board()
-                    draw_board(board, orientation)
+                        draw(node, orientation)
         pygame.display.flip()
     pygame.quit()
 
