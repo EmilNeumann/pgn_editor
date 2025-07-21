@@ -12,7 +12,8 @@ import chess.svg
 import pygame
 
 
-SIZE = 390
+BORDER = True
+SIZE = 45*8 + 15*BORDER
 
 
 @functools.cache
@@ -31,6 +32,16 @@ def get_coordinates(file_index, rank_index, orientation, border):
     x = 15*border + 45*file_index
     y = 15*border + 45*rank_index
     return x, y
+
+
+def get_square(x, y, orientation, border):
+    file_index = (x - 15*border) // 45
+    rank_index = (y - 15*border) // 45
+    if orientation:
+        rank_index = 7 - rank_index
+    else:
+        file_index = 7 - file_index
+    return file_index, rank_index
 
 
 def get_color_from_nags(nags: set[int]) -> str:
@@ -81,7 +92,7 @@ def draw(node, orientation):
         if piece is None:
             continue
         piece_surface = get_piece_surface(piece.piece_type, piece.color)
-        x, y = get_coordinates(file_index, rank_index, orientation, True)
+        x, y = get_coordinates(file_index, rank_index, orientation, BORDER)
         window.blit(piece_surface, (x, y))
 
 
@@ -97,6 +108,8 @@ def main():
     orientation = chess.BLACK
     
     draw(node, orientation)
+    
+    active_square = None
     
     running = True
     while running:
@@ -114,6 +127,18 @@ def main():
                     if node.variations:
                         node = random.choice(node.variations)
                         draw(node, orientation)
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                x, y = event.pos
+                file, rank = get_square(x, y, orientation, BORDER)
+                square = chess.square(file, rank)
+                if active_square is None:
+                    active_square = square
+                else:
+                    move = chess.Move(active_square, square)
+                    active_square = None
+                    print(move)
+                    # TODO: check if move is in variations
+                    # TODO: play move
         pygame.display.flip()
     pygame.quit()
 
