@@ -67,10 +67,12 @@ class ReplayMode(EventHandler):
 
 
 class PracticeMode(EventHandler):
-    def __init__(self, parent):
+    def __init__(self, parent, color):
         super().__init__(parent)
         self.active_square = None
-        self.parent.make_random_move()
+        self.color = color
+        if not color:
+            self.parent.make_random_move()
     
     def key_down(self, event):
         if event.key == pygame.K_f:
@@ -78,7 +80,8 @@ class PracticeMode(EventHandler):
         if event.key == pygame.K_r:
             # reset to root node
             self.parent.node = self.parent.node.game()
-            self.parent.make_random_move()
+            if not self.color:
+                self.parent.make_random_move()
     
     def mouse_button_down(self, event):
         x, y = event.pos
@@ -92,35 +95,40 @@ class PracticeMode(EventHandler):
                 self.active_square = None
                 return
             self.active_square = None
-            correct = False
-            variations = self.parent.node.variations
-            if not variations:
-                print("variation ended")
-                return
-            for child_node in variations:
-                if child_node.move == move:
-                    correct = True
-                    self.parent.node = child_node
-                    break
-            if correct:
-                print("correct")
-                self.parent.make_random_move()
-            else:
-                print("wrong")
+            self.check_move(move)
+    
+    def check_move(self, move):
+        correct = False
+        variations = self.parent.node.variations
+        if not variations:
+            print("variation ended")
+            return
+        for child_node in variations:
+            if child_node.move == move:
+                correct = True
+                self.parent.node = child_node
+                break
+        if correct:
+            print("correct")
+            self.parent.make_random_move()
+        else:
+            print("wrong")
 
 
 class Window:
     def __init__(self):
-        with open('test.pgn') as f:
+        with open('pgn/jaenisch_gambit.pgn') as f:
             game = chess.pgn.read_game(f)
         self.node = game
-        self.mode = PracticeMode(self)
+        self.mode = PracticeMode(self, chess.BLACK)
         self.orientation = chess.BLACK
         self.surface = None
+        self.font = None
     
     def mainloop(self):
         pygame.init()
         self.surface = pygame.display.set_mode((SIZE, SIZE))
+        self.font = pygame.font.SysFont('sourcecodepro', 16)
         running = True
         while running:
             for event in pygame.event.get():
@@ -136,11 +144,10 @@ class Window:
     
     def draw(self):
         board = self.node.board()
-        # TODO: add arrows
         board_svg = chess.svg.board(
             board,
             orientation=self.orientation,
-            # arrows=arrows,
+            arrows=self.get_arrows(),
             size=SIZE
         )
         buffer = io.BytesIO(board_svg.encode())
@@ -154,6 +161,23 @@ class Window:
             piece_surface = get_piece_surface(piece.piece_type, piece.color)
             pos = self.square_to_pixel(file_index, rank_index)
             self.surface.blit(piece_surface, pos)
+    
+    def draw_move_list(self):
+        pass
+    
+    def get_arrows(self) -> list:
+        if len(self.node.variations) <= 1:
+            return []
+        arrows = []
+        for child_node in self.node.variations:
+            arrows.append(
+                chess.svg.Arrow(
+                    child_node.move.from_square,
+                    child_node.move.to_square,
+                    color=get_color_from_nags(child_node.nags)
+                )
+            )
+        return arrows
     
     def flip_board(self):
         self.orientation = not self.orientation
