@@ -13,7 +13,7 @@ import pygame
 
 
 BORDER = True
-SIZE = 45*8 + 15*BORDER
+SIZE = 45*8 + 30*BORDER
 
 
 @functools.cache
@@ -127,7 +127,7 @@ class Window:
     
     def mainloop(self):
         pygame.init()
-        self.surface = pygame.display.set_mode((SIZE, SIZE))
+        self.surface = pygame.display.set_mode((SIZE+200, SIZE))
         self.font = pygame.font.SysFont('sourcecodepro', 16)
         running = True
         while running:
@@ -143,6 +143,7 @@ class Window:
         pygame.quit()
     
     def draw(self):
+        self.surface.fill("#000000")  # clear
         board = self.node.board()
         board_svg = chess.svg.board(
             board,
@@ -161,9 +162,32 @@ class Window:
             piece_surface = get_piece_surface(piece.piece_type, piece.color)
             pos = self.square_to_pixel(file_index, rank_index)
             self.surface.blit(piece_surface, pos)
+        self.draw_move_list()
     
     def draw_move_list(self):
-        pass
+        pgn = str(chess.pgn.Game.from_board(self.node.board()))
+        moves = pgn.rpartition('\n')[-1]
+        parts = moves.split(' ')
+        lines = []
+        line = []
+        for part in parts:
+            if part.endswith('.'):
+                if line:
+                    lines.append(line)
+                line = []
+            line.append(part)
+        if line:
+            lines.append(line)
+        total_height = 0
+        for line in lines:
+            text_surface = self.font.render(
+                ' '.join(line),
+                False,
+                "#ffffff",
+                "#000000"
+            )
+            self.surface.blit(text_surface, (SIZE+15, total_height))
+            total_height += text_surface.get_height()
     
     def get_arrows(self) -> list:
         if len(self.node.variations) <= 1:
