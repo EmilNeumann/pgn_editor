@@ -127,7 +127,7 @@ class Window:
     
     def mainloop(self):
         pygame.init()
-        self.surface = pygame.display.set_mode((SIZE+200, SIZE))
+        self.surface = pygame.display.set_mode((SIZE+200, SIZE+100))
         self.font = pygame.font.SysFont('sourcecodepro', 16)
         running = True
         while running:
@@ -163,6 +163,7 @@ class Window:
             pos = self.square_to_pixel(file_index, rank_index)
             self.surface.blit(piece_surface, pos)
         self.draw_move_list()
+        self.draw_comment()
     
     def draw_move_list(self):
         pgn = str(chess.pgn.Game.from_board(self.node.board()))
@@ -188,6 +189,15 @@ class Window:
             )
             self.surface.blit(text_surface, (SIZE+15, total_height))
             total_height += text_surface.get_height()
+    
+    def draw_comment(self):
+        comment_surface = self.font.render(
+            self.node.comment.encode('latin-1'),
+            False,
+            "#ffffff",
+            "#000000"
+        )
+        self.surface.blit(comment_surface, (0, SIZE + 15))
     
     def get_arrows(self) -> list:
         if len(self.node.variations) <= 1:
