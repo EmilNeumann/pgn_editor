@@ -124,6 +124,7 @@ class Window:
         self.orientation = chess.BLACK
         self.surface = None
         self.font = None
+        self.show_arrows = False
     
     def mainloop(self):
         pygame.init()
@@ -200,6 +201,8 @@ class Window:
         self.surface.blit(comment_surface, (0, SIZE + 15))
     
     def get_arrows(self) -> list:
+        if not self.show_arrows:
+            return []
         if len(self.node.variations) <= 1:
             return []
         arrows = []
