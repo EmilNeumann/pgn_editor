@@ -47,11 +47,29 @@ def get_color_from_nags(nags: set[int]) -> str:
 class EventHandler:
     def __init__(self, parent):
         self.parent: Window = parent
+        self.active_square = None
     
     def key_down(self, event):
         pass
     
     def mouse_button_down(self, event):
+        x, y = event.pos
+        file_index, rank_index = self.parent.pixel_to_square(x, y)
+        square = chess.square(file_index, rank_index)
+        if self.active_square is None:
+            self.active_square = square
+            return
+        if self.active_square == square:
+            self.active_square = None
+            return
+        move = chess.Move(self.active_square, square)
+        self.active_square = None
+        self.process_move(move)
+    
+    def process_move(self, move):
+        pass
+    
+    def get_info(self) -> str:
         pass
 
 
@@ -64,6 +82,15 @@ class ReplayMode(EventHandler):
             self.parent.node = node.parent or node
         if event.key == pygame.K_RIGHT:
             self.parent.make_random_move()
+    
+    def process_move(self, move):
+        for child_node in self.parent.node.variations:
+            if child_node.move == move:
+                self.parent.node = child_node
+                break
+    
+    def get_info(self) -> str:
+        return self.parent.node.comment
 
 
 class PracticeMode(EventHandler):
@@ -83,21 +110,7 @@ class PracticeMode(EventHandler):
             if not self.color:
                 self.parent.make_random_move()
     
-    def mouse_button_down(self, event):
-        x, y = event.pos
-        file_index, rank_index = self.parent.pixel_to_square(x, y)
-        square = chess.square(file_index, rank_index)
-        if self.active_square is None:
-            self.active_square = square
-        else:
-            move = chess.Move(self.active_square, square)
-            if self.active_square == square:
-                self.active_square = None
-                return
-            self.active_square = None
-            self.check_move(move)
-    
-    def check_move(self, move):
+    def process_move(self, move):
         correct = False
         variations = self.parent.node.variations
         if not variations:
@@ -113,6 +126,12 @@ class PracticeMode(EventHandler):
             self.parent.make_random_move()
         else:
             print("wrong")
+    
+    def get_info(self) -> str:
+        variation_count = len(self.parent.node.variations)
+        if variation_count:
+            return f"{variation_count} variations"
+        return self.parent.node.comment
 
 
 class Window:
@@ -164,7 +183,7 @@ class Window:
             pos = self.square_to_pixel(file_index, rank_index)
             self.surface.blit(piece_surface, pos)
         self.draw_move_list()
-        self.draw_comment()
+        self.draw_info()
     
     def draw_move_list(self):
         pgn = str(chess.pgn.Game.from_board(self.node.board()))
@@ -191,9 +210,9 @@ class Window:
             self.surface.blit(text_surface, (SIZE+15, total_height))
             total_height += text_surface.get_height()
     
-    def draw_comment(self):
+    def draw_info(self):
         comment_surface = self.font.render(
-            self.node.comment.encode('latin-1'),
+            self.mode.get_info().encode('latin-1'),
             False,
             "#ffffff",
             "#000000"
