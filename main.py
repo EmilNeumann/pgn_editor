@@ -48,6 +48,7 @@ class EventHandler:
     def __init__(self, parent):
         self.parent: Window = parent
         self.active_square = None
+        self.show_arrows = True
     
     def key_down(self, event):
         pass
@@ -96,7 +97,7 @@ class ReplayMode(EventHandler):
 class PracticeMode(EventHandler):
     def __init__(self, parent, color):
         super().__init__(parent)
-        self.active_square = None
+        self.show_arrows = False
         self.color = color
         if not color:
             self.parent.make_random_move()
@@ -143,7 +144,6 @@ class Window:
         self.orientation = chess.BLACK
         self.surface = None
         self.font = None
-        self.show_arrows = False
     
     def mainloop(self):
         pygame.init()
@@ -220,7 +220,7 @@ class Window:
         self.surface.blit(comment_surface, (0, SIZE + 15))
     
     def get_arrows(self) -> list:
-        if not self.show_arrows:
+        if not self.mode.show_arrows:
             return []
         if len(self.node.variations) <= 1:
             return []
