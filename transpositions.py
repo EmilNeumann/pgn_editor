@@ -46,6 +46,7 @@ def show_malformed_transpositions(positions: dict[str, list]):
         for node in nodes:
             mainlines += bool(node.variations)
             comments += node.comment.startswith('transposes into ')
+            comments += node.comment == 'repeats the position'
         if mainlines > 1 or comments < len(nodes) - 1:
             print(fen)
             for node in nodes:
