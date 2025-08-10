@@ -78,6 +78,8 @@ class ReplayMode(EventHandler):
     def key_down(self, event):
         if event.key == pygame.K_f:
             self.parent.flip_board()
+        if event.key == pygame.K_x:
+            self.parent.enter_practice_mode()
         node = self.parent.node
         if event.key == pygame.K_LEFT:
             self.parent.node = node.parent or node
@@ -99,7 +101,8 @@ class PracticeMode(EventHandler):
         super().__init__(parent)
         self.show_arrows = False
         self.color = color
-        if not color:
+        self.start_node = self.parent.node
+        if self.start_node.turn() != color:
             self.parent.make_random_move()
     
     def key_down(self, event):
@@ -107,9 +110,11 @@ class PracticeMode(EventHandler):
             self.parent.flip_board()
         if event.key == pygame.K_r:
             # reset to root node
-            self.parent.node = self.parent.node.game()
-            if not self.color:
+            self.parent.node = self.start_node
+            if self.start_node.turn() != self.color:
                 self.parent.make_random_move()
+        if event.key == pygame.K_x:
+            self.parent.exit_practice_mode()
     
     def process_move(self, move):
         correct = False
@@ -140,7 +145,7 @@ class Window:
         with open('pgn/jaenisch_gambit.pgn') as f:
             game = chess.pgn.read_game(f)
         self.node = game
-        self.mode = PracticeMode(self, chess.BLACK)
+        self.mode = ReplayMode(self)
         self.orientation = chess.BLACK
         self.surface = None
         self.font = None
@@ -259,6 +264,12 @@ class Window:
         else:
             file_index = 7 - file_index
         return file_index, rank_index
+    
+    def enter_practice_mode(self):
+        self.mode = PracticeMode(self, chess.BLACK)
+    
+    def exit_practice_mode(self):
+        self.mode = ReplayMode(self)
 
 
 def main():
