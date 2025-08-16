@@ -20,7 +20,9 @@ def show_node_info(node):
 
 
 def get_positions(node, positions: dict[str, list]):
-    fen = node.board().board_fen()
+    fen = node.board().fen()
+    *parts, _, _ = fen.split()  # remove half move clock and full move number
+    fen = ' '.join(parts)
     positions[fen] = positions.get(fen, [])
     positions[fen].append(node)
     for child_node in node.variations:
