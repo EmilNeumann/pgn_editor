@@ -122,6 +122,8 @@ class PracticeMode(EventHandler):
         if not variations:
             print("variation ended")
             return
+        if not self.parent.node.board().is_legal(move):
+            return
         for child_node in variations:
             if child_node.move == move:
                 correct = True
