@@ -176,6 +176,7 @@ class Window:
             board,
             orientation=self.orientation,
             arrows=self.get_arrows(),
+            fill={self.mode.active_square: "#ff800080"},
             size=SIZE
         )
         buffer = io.BytesIO(board_svg.encode())
