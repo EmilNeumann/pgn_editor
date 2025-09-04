@@ -56,6 +56,8 @@ class EventHandler:
     def mouse_button_down(self, event):
         x, y = event.pos
         file_index, rank_index = self.parent.pixel_to_square(x, y)
+        if file_index not in range(8) or rank_index not in range(8):
+            return
         square = chess.square(file_index, rank_index)
         if self.active_square is None:
             self.active_square = square
