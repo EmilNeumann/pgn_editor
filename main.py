@@ -12,8 +12,11 @@ import chess.svg
 import pygame
 
 
-BORDER = True
-SIZE = 45*8 + 30*BORDER
+# BORDER = True
+BORDER_SIZE = 15
+SQUARE_SIZE = 45
+SIZE = SQUARE_SIZE*8 + BORDER_SIZE*2
+PLAYER_NAME = "Aemyl"
 
 
 @functools.cache
@@ -146,11 +149,13 @@ class PracticeMode(EventHandler):
 
 class Window:
     def __init__(self):
+        self.orientation = chess.WHITE
         with open('pgn/jaenisch_gambit.pgn') as f:
             game = chess.pgn.read_game(f)
+            if game.headers["Black"] == PLAYER_NAME:
+                self.orientation = chess.BLACK
         self.node = game
         self.mode = ReplayMode(self)
-        self.orientation = chess.BLACK
         self.surface = None
         self.font = None
     
@@ -217,7 +222,7 @@ class Window:
                 "#ffffff",
                 "#000000"
             )
-            self.surface.blit(text_surface, (SIZE+15, total_height))
+            self.surface.blit(text_surface, (SIZE+BORDER_SIZE, total_height))
             total_height += text_surface.get_height()
     
     def draw_info(self):
@@ -227,7 +232,7 @@ class Window:
             "#ffffff",
             "#000000"
         )
-        self.surface.blit(comment_surface, (0, SIZE + 15))
+        self.surface.blit(comment_surface, (0, SIZE + BORDER_SIZE))
     
     def get_arrows(self) -> list:
         if not self.mode.show_arrows:
@@ -257,13 +262,13 @@ class Window:
             rank_index = 7 - rank_index
         else:
             file_index = 7 - file_index
-        x = 15*BORDER + 45*file_index
-        y = 15*BORDER + 45*rank_index
+        x = BORDER_SIZE + SQUARE_SIZE*file_index
+        y = BORDER_SIZE + SQUARE_SIZE*rank_index
         return x, y
     
     def pixel_to_square(self, x, y):
-        file_index = (x - 15*BORDER) // 45
-        rank_index = (y - 15*BORDER) // 45
+        file_index = (x - BORDER_SIZE) // SQUARE_SIZE
+        rank_index = (y - BORDER_SIZE) // SQUARE_SIZE
         if self.orientation:
             rank_index = 7 - rank_index
         else:
@@ -271,7 +276,7 @@ class Window:
         return file_index, rank_index
     
     def enter_practice_mode(self):
-        self.mode = PracticeMode(self, chess.BLACK)
+        self.mode = PracticeMode(self, self.orientation)
     
     def exit_practice_mode(self):
         self.mode = ReplayMode(self)
