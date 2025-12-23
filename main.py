@@ -178,6 +178,11 @@ class Window:
     
     def draw(self):
         self.surface.fill("#000000")  # clear
+        self.draw_board()
+        self.draw_move_list()
+        self.draw_info()
+    
+    def draw_board(self):
         board = self.node.board()
         board_svg = chess.svg.board(
             board,
@@ -197,8 +202,6 @@ class Window:
             piece_surface = get_piece_surface(piece.piece_type, piece.color)
             pos = self.square_to_pixel(file_index, rank_index)
             self.surface.blit(piece_surface, pos)
-        self.draw_move_list()
-        self.draw_info()
     
     def draw_move_list(self):
         pgn = str(chess.pgn.Game.from_board(self.node.board()))
