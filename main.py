@@ -52,6 +52,7 @@ class EventHandler:
         self.parent: Window = parent
         self.active_square = None
         self.show_arrows = True
+        self.show_tree = True
     
     def key_down(self, event):
         pass
@@ -105,6 +106,7 @@ class PracticeMode(EventHandler):
     def __init__(self, parent, color):
         super().__init__(parent)
         self.show_arrows = False
+        self.show_tree = False
         self.color = color
         self.start_node = self.parent.node
         if self.start_node.turn() != color:
@@ -180,6 +182,8 @@ class Window:
         self.surface.fill("#000000")  # clear
         self.draw_board()
         self.draw_move_list()
+        if self.mode.show_tree:
+            self.draw_tree_view()
         self.draw_info()
     
     def draw_board(self):
@@ -236,6 +240,9 @@ class Window:
             "#000000"
         )
         self.surface.blit(comment_surface, (0, SIZE + BORDER_SIZE))
+    
+    def draw_tree_view(self):
+        pass
     
     def get_arrows(self) -> list:
         if not self.mode.show_arrows:
