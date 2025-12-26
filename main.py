@@ -11,6 +11,8 @@ import chess.pgn
 import chess.svg
 import pygame
 
+import transpositions
+
 
 # BORDER = True
 BORDER_SIZE = 15
@@ -152,18 +154,20 @@ class PracticeMode(EventHandler):
 class Window:
     def __init__(self):
         self.orientation = chess.WHITE
-        with open('pgn/jaenisch_gambit.pgn') as f:
+        with open('pgn/owen_defense.pgn') as f:
             game = chess.pgn.read_game(f)
             if game.headers["Black"] == PLAYER_NAME:
                 self.orientation = chess.BLACK
         self.node = game
+        self.positions = {}
+        transpositions.get_positions(game, self.positions)
         self.mode = ReplayMode(self)
         self.surface = None
         self.font = None
     
     def mainloop(self):
         pygame.init()
-        self.surface = pygame.display.set_mode((SIZE+200, SIZE+100))
+        self.surface = pygame.display.set_mode((SIZE+500, SIZE+500))
         self.font = pygame.font.SysFont('sourcecodepro', 16)
         running = True
         while running:
@@ -181,7 +185,7 @@ class Window:
     def draw(self):
         self.surface.fill("#000000")  # clear
         self.draw_board()
-        self.draw_move_list()
+        # self.draw_move_list()
         if self.mode.show_tree:
             self.draw_tree_view()
         self.draw_info()
@@ -242,7 +246,37 @@ class Window:
         self.surface.blit(comment_surface, (0, SIZE + BORDER_SIZE))
     
     def draw_tree_view(self):
-        pass
+        lines = []  # list of tuples (indentation, moves)
+        current_line = []  # list of tuples (board, move)
+        unprocessed_nodes = [(0, self.node.game().variation(0))]
+        while unprocessed_nodes:
+            indentation, node = unprocessed_nodes.pop()
+            current_line.append((node.parent.board(), node.move))
+            match len(node.variations):
+                case 0:
+                    lines.append((indentation, current_line))
+                    current_line = []
+                    indentation -= 1
+                case 1:
+                    unprocessed_nodes.append((indentation, node.variation(0)))
+                case _:
+                    lines.append((indentation, current_line))
+                    current_line = []
+                    indentation += 1
+                    for child_node in reversed(node.variations):
+                        unprocessed_nodes.append((indentation, child_node))
+        # TODO: render lines as text
+        total_height = 0
+        for indentation, line in lines:
+            text = "  " * indentation
+            for board, move in line:
+                text += board.san(move) + ' '
+            text = text.rstrip()
+            text_surface = self.font.render(
+                text, False, "#ffffff", "#000000"
+            )
+            self.surface.blit(text_surface, (SIZE+BORDER_SIZE, total_height))
+            total_height += text_surface.get_height()
     
     def get_arrows(self) -> list:
         if not self.mode.show_arrows:
