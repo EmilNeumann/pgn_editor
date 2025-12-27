@@ -169,7 +169,7 @@ class Window:
     
     def mainloop(self):
         pygame.init()
-        self.surface = pygame.display.set_mode((SIZE+500, SIZE+500))
+        self.surface = pygame.display.set_mode((SIZE+700, SIZE+500))
         self.font = pygame.font.SysFont('sourcecodepro', 16)
         running = True
         while running:
@@ -206,7 +206,12 @@ class Window:
                         unprocessed_nodes.append((indentation, child_node))
         for indentation, line in lines:
             text = "  " * indentation
+            board = line[0][0]
+            if board.turn == chess.BLACK:
+                text += f"{board.fullmove_number}... "
             for board, move in line:
+                if board.turn == chess.WHITE:
+                    text += f"{board.fullmove_number}. "
                 text += board.san(move) + ' '
             self.tree_text.append(text.rstrip())
     
