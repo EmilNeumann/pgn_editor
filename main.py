@@ -164,6 +164,8 @@ class Window:
         self.mode = ReplayMode(self)
         self.surface = None
         self.font = None
+        self.tree_text = []
+        self.init_treeview()
     
     def mainloop(self):
         pygame.init()
@@ -181,6 +183,32 @@ class Window:
             self.draw()
             pygame.display.flip()
         pygame.quit()
+    
+    def init_treeview(self):
+        lines = []  # list of tuples (indentation, moves)
+        current_line = []  # list of tuples (board, move)
+        unprocessed_nodes = [(0, self.node.game().variation(0))]
+        while unprocessed_nodes:
+            indentation, node = unprocessed_nodes.pop()
+            current_line.append((node.parent.board(), node.move))
+            match len(node.variations):
+                case 0:
+                    lines.append((indentation, current_line))
+                    current_line = []
+                    indentation -= 1
+                case 1:
+                    unprocessed_nodes.append((indentation, node.variation(0)))
+                case _:
+                    lines.append((indentation, current_line))
+                    current_line = []
+                    indentation += 1
+                    for child_node in reversed(node.variations):
+                        unprocessed_nodes.append((indentation, child_node))
+        for indentation, line in lines:
+            text = "  " * indentation
+            for board, move in line:
+                text += board.san(move) + ' '
+            self.tree_text.append(text.rstrip())
     
     def draw(self):
         self.surface.fill("#000000")  # clear
@@ -246,32 +274,8 @@ class Window:
         self.surface.blit(comment_surface, (0, SIZE + BORDER_SIZE))
     
     def draw_tree_view(self):
-        lines = []  # list of tuples (indentation, moves)
-        current_line = []  # list of tuples (board, move)
-        unprocessed_nodes = [(0, self.node.game().variation(0))]
-        while unprocessed_nodes:
-            indentation, node = unprocessed_nodes.pop()
-            current_line.append((node.parent.board(), node.move))
-            match len(node.variations):
-                case 0:
-                    lines.append((indentation, current_line))
-                    current_line = []
-                    indentation -= 1
-                case 1:
-                    unprocessed_nodes.append((indentation, node.variation(0)))
-                case _:
-                    lines.append((indentation, current_line))
-                    current_line = []
-                    indentation += 1
-                    for child_node in reversed(node.variations):
-                        unprocessed_nodes.append((indentation, child_node))
-        # TODO: render lines as text
         total_height = 0
-        for indentation, line in lines:
-            text = "  " * indentation
-            for board, move in line:
-                text += board.san(move) + ' '
-            text = text.rstrip()
+        for text in self.tree_text:
             text_surface = self.font.render(
                 text, False, "#ffffff", "#000000"
             )
