@@ -218,9 +218,10 @@ class Window:
     def draw(self):
         self.surface.fill("#000000")  # clear
         self.draw_board()
-        # self.draw_move_list()
         if self.mode.show_tree:
             self.draw_tree_view()
+        else:
+            self.draw_move_list()
         self.draw_info()
     
     def draw_board(self):
