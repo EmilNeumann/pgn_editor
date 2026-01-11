@@ -93,11 +93,13 @@ class ReplayMode(EventHandler):
             self.parent.node = node.parent or node
         if event.key == pygame.K_RIGHT:
             self.parent.make_random_move()
+        self.parent.init_treeview()
     
     def process_move(self, move):
         for child_node in self.parent.node.variations:
             if child_node.move == move:
                 self.parent.node = child_node
+                self.parent.init_treeview()
                 break
     
     def get_info(self) -> str:
@@ -154,7 +156,7 @@ class PracticeMode(EventHandler):
 class Window:
     def __init__(self):
         self.orientation = chess.WHITE
-        with open('pgn/owen_defense.pgn') as f:
+        with open('pgn/jaenisch_gambit.pgn') as f:
             game = chess.pgn.read_game(f)
             if game.headers["Black"] == PLAYER_NAME:
                 self.orientation = chess.BLACK
@@ -185,9 +187,13 @@ class Window:
         pygame.quit()
     
     def init_treeview(self):
+        self.tree_text = []
         lines = []  # list of tuples (indentation, moves)
         current_line = []  # list of tuples (board, move)
-        unprocessed_nodes = [(0, self.node.game().variation(0))]
+        start_node = self.node
+        if start_node.parent is None:
+            start_node = start_node.variation(0)
+        unprocessed_nodes = [(0, start_node)]
         while unprocessed_nodes:
             indentation, node = unprocessed_nodes.pop()
             current_line.append((node.parent.board(), node.move))
