@@ -1,2 +1,9 @@
-/board.png
-/board.svg
+# Gitignore
+
+# Caches
+__pycache__/
+**/__pycache__/
+
+# Images
+images/**
+
