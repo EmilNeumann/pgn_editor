@@ -30,6 +30,7 @@ FONT_SIZE = 15
 FONT_TYPE = 'arial'
 
 # TODO: introduce true randomness (even distribution) for random moves
+# not possible with random.seed(42)
 # TODO K_RETURN: 
 # TODO MOUSE_DOWN:
 
