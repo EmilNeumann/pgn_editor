@@ -1,0 +1,49 @@
+[Event "Preparation"]
+[Site ""]
+[Date ""]
+[Round ""]
+[White "Player"]
+[Black "Aemyl"]
+[Result ""]
+
+1. e4 e5 2. d4 {Center Game}
+2... exd4 {Accepted}
+3. c3 {Danish Gambit}
+3... Qe7 {super rare top engine move}
+4. Bd3
+ (4. cxd4 Qxe4+ 5. Be3
+   (5. Be2 Qxg2 6. Bf3 Qg6)
+   (5. Ne2 {TODO: decide between Nf6, Bb4+ and d5})
+   (5. Qe2 Qxe2+ 6. Bxe2 {TODO})
+  5... Nf6)
+ (4. Qxd4 Nc6 5. Qe3 Nf6 6. Bd3 d5 7. exd5 Ne5 8. Bb5+ c6 9. dxc6 bxc6
+  10. Be2
+   (10. Ba4 $4 10... Ba6 11. Nf3 Nfg4 12. Qe4 Nd3+)
+  10... Nfg4)
+ (4. Bc4 Qxe4+ 5. Ne2 d5 6. Bd3
+   (6. Bb3)
+  6... Qxg2 7. Rg1 Qxh2 8. Bf4
+   (8. cxd4 Bd6)
+  8... Qh4 9. Bxc7
+   (9. Bg3 Qf6)
+   (9. cxd4 Qd8 10. Nbc3 g6 11. Be5 f6 12. Qa4+ c6 13. Qc2 fxe5
+    14. Bxg6+ hxg6 15. Qxg6+ Ke7 16. Qg5+ Nf6 17. dxe5 Nd7
+    18. exf6+ Nxf6 19. Nf4 Rg8 20. Qe5+ Kf7 21. Rxg8 Kxg8 22. Qg5+ Bg7)
+   (9. Qa4+)
+  9... Nc6)
+4... d5 5. Qe2
+ (5. f3)
+ (5. cxd4 dxe4 6. Bc4
+   (6. Bc2 Nc6 7. Ne2
+     (7. Nc3 {TODO})
+     (7. Be3 {TODO})
+    7... Bg4)
+   (6. Be2 {TODO})
+   (6. Bb5+ Bd7 7. Bxd7+
+     (7. Nc3 Bxb5 8. Nxb5 {TODO (Nc6?)})
+    7... Qxd7)
+  6... Nf6)
+ (5. Nd2)
+ (5. e5)
+ (5. Qa4+)
+5... dxe4 *

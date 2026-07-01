@@ -1,0 +1,64 @@
+[Event "Preparation"]
+[Site "*"]
+[Date "*"]
+[Round "*"]
+[White "Player"]
+[Black "Aemyl"]
+[Result "*"]
+
+1. d4 d5 2. c4 {Queen's Gambit}
+2... e5 {Albin Countergambit}
+3. dxe5
+ (3. Nc3 $6 3... exd4 4. Qxd4 Nc6 5. Qxd5 Be6 6. Qxd8+ Rxd8 7. e3 $4
+   (7. Bd2 Bxc4 8. O-O-O
+     (8. Nf3)
+    8... Nf6 9. Nf3
+     (9. f3)
+     (9. e3)
+    9... Nb4 10. a3 Nbd5 11. Nxd5
+     (11. e3 Bb3)
+    11... Bxd5)
+   (7. Nf3 $4 7... Nb4)
+   (7. Bf4 Bxc4 8. Bxc7 Rd7 9. Bf4
+     (9. Bg3 Nb4 10. Rc1 Nxa2 11. Nxa2 Bxa2)
+    9... Nb4 10. Rc1 Nxa2 11. Nxa2 Bxa2)
+   (7. a3 $4 7... Nd4)
+   (7. e4 $4 7... Nb4)
+   (7. b3 $4 7... Nb4)
+   (7. Bg5 f6 8. Bf4 Bxc4 9. Bxc7 Rd7 10. Bf4
+     (10. Bg3 $2 10... Nb4 11. Rc1 Nxa2 12. Nxa2 Bxa2)
+    10... Nb4 11. Rc1 Nxa2 12. Nxa2 Bxa2)
+  7... Nb4 8. Rb1
+   (8. Ke2)
+  8... Nc2+ 9. Ke2 Bxc4+ 10. Kf3 Bxf1)
+ (3. e3 {TODO})
+ (3. cxd5 {TODO})
+3... d4 4. Nf3
+ (4. e3 Bb4+ 5. Bd2 dxe3 {Lasker Trap}
+  6. fxe3
+   (6. Bxb4 exf2+ 7. Ke2
+     (7. Kxf2 Qxd1)
+    7... fxg1=N+ 8. Rxg1
+     (8. Ke1)
+    8... Bg4+))
+ (4. a3 Ne7 5. Nf3
+   (5. e3 Nbc6 6. Nf3
+     (6. exd4 Qxd4 7. Qxd4
+       (7. Nf3)
+      7... Nxd4 8. Bd3 $4
+       (8. Kd1 $4 8... Nb3 9. Ra2 Bf5 10. Nd2 O-O-O)
+       (8. Ra2 $1 {TODO})
+      8... Nb3)
+    6... Bg4)
+  5... c5)
+4... Nc6 5. e3
+ (5. a3)
+ (5. g3)
+ (5. Nbd2)
+ (5. Bf4)
+ (5. Bg5)
+5... Bb4+ 6. Bd2 dxe3 7. fxe3
+ (7. Bxb4)
+7... Bxd2+ 8. Qxd2 {TODO: decide between Qxd2+ and Bg4}
+ (8. Nbxd2)
+*

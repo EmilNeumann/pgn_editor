@@ -1,0 +1,301 @@
+[Event "Preparation"]
+[Site "*"]
+[Date "*"]
+[Round "*"]
+[White "Aemyl"]
+[Black "Player"]
+[Result "*"]
+
+1. e4 c5 {Sicilian Defense}
+2. Nf3
+ (2. d4 {Smith-Morra Gambit}
+  2... cxd4 3. c3 dxc3 {Accepted}
+  4. Nxc3 {TODO})
+ (2. a3 {Mengarini Variation}
+  2... Nc6 3. b4 cxb4 4. axb4 Nxb4 5. c3 Nc6 6. d4 d5 7. exd5 Qxd5
+  8. Na3 e5
+   (8... Nf6 9. Nb5 Qd8 10. d5 Ne5 11. Bf4 Nfd7
+     (11... Ng6 12. Nc7+ Kd7 13. Bb5#)
+    12. Nf3 f6 13. Nfd4 Nc5 14. Bxe5 fxe5 15. Qh5+ g6 16. Qxe5 Rg8
+    17. Nc7+ Kf7 18. Nde6 Qd6 19. Ng5#)
+   (8... e6)
+   (8... a6)
+  9. Nb5 Qd8
+   (9... Bd6)
+  10. d5 Nb8 11. d6 Na6 12. Nf3)
+2... Nc6 {Old Sicilian}
+ (2... d6 {Modern Variations}
+  3. d4
+   (3. c3 {Delayed Alapin Variation})
+  3... cxd4 4. Nxd4 Nf6 5. Nc3 a6 {Najdorf Variation}
+   (5... g6 {Dragon Variation}
+    6. Be3 Bg7 7. f3 {Yugoslav Attack}
+    7... O-O
+     (7... Nc6 {Belezky Line}
+      8. Qd2)
+     (7... a6 8. Qd2 O-O
+       (8... h5)
+       (8... Nc6 {TODO: transposition link})
+       (8... b5 9. a4 b4 10. Na2 a5 11. c3
+         (11. Bb5+))
+       (8... Nbd7)
+      9. O-O-O)
+    8. Qd2 Nc6 9. O-O-O {Modern Line}
+     (9. Bc4 {Main Line})
+    9... d5 {TODO})
+   (5... Nc6 {Classical Variation}
+    6. Bg5 {Richter-Rauzer Variation}
+    6... e6 7. Qd2 {Traditional Variation}
+     (7. Qd3 {equally good according to Leela, but harder to prepare})
+    7... a6 {Neo-Modern Variation}
+     (7... Be7 {Classical Variation}
+      8. O-O-O O-O
+       (8... a6)
+       (8... Nxd4)
+      9. f4 Nxd4 {Rauzer Attack}
+       (9... a6)
+       (9... h6)
+      10. Qxd4 Qa5
+       (10... h6)
+       (10... a6)
+      11. e5 dxe5 12. Qxe5 Qxe5
+       (12... Qb6)
+       (12... b5)
+      13. fxe5 Nd5 14. Bxe7 Nxe7 15. Bd3 b6
+       (15... Nc6)
+      16. Be4 Rb8 17. Rhe1 Bb7 18. Rd7 Bxe4 19. Rxe4 Nc6 20. Nb5 Rfd8
+      21. Rc7 Rbc8 22. Rxc8 Rxc8 23. Rc4 Ne7 24. Rxc8+ Nxc8 25. Kd2 Kf8
+      26. Kd3)
+    8. O-O-O Bd7
+     (8... h6)
+     (8... Be7 {transposes into 7... Be7 8. O-O-O a6})
+    9. f4 b5
+     (9... Be7)
+     (9... h6)
+    10. Bxf6 gxf6 11. Kb1 Qb6 12. Nxc6 Bxc6 13. f5 b4
+     (13... Qc5)
+     (13... h5)
+    14. Ne2 e5 15. Ng3 h5
+     (15... Qc5)
+    16. h4 Qc5
+     (16... Bh6)
+    17. Qe2 {prepares Nxh5})
+   (5... e6 {Scheveningen Variation}
+    6. g4 {Keres Attack}
+    6... h6
+     (6... Be7 7. g5 Nfd7 8. Be3 Bxg5
+       (8... a6 9. f4 Nc6
+         (9... Qc7)
+         (9... b5 10. a3 Bb7 11. f5 {extremely rare move}
+          11... Bxg5 12. Nxe6 fxe6
+           (12... Bh4+ 13. Kd2 fxe6 14. Qh5+ Kf8 15. fxe6 Qe7 16. Bh3 g6
+            17. Raf1+ Ke8 18. exd7+ Nxd7 19. Qd1)
+          13. Qh5+ g6 14. Qxg5 Qxg5 15. Bxg5 gxf5 O-O-O)
+         (9... O-O)
+         (9... e5)
+        10. h4)
+       (8... Nc6)
+       (8... O-O)
+      9. Nxe6 fxe6 10. Qh5+ g6 11. Qxg5 Qxg5 12. Bxg5)
+     (6... a6 7. g5 Nfd7 8. Be3)
+     (6... Nc6 7. g5 Nd7)
+     (6... e5 7. Bb5+ Bd7)
+    7. Rg1 Nc6
+     (7... Be7 8. Be3)
+     (7... a6 8. h4)
+    8. Be3)
+   (5... e5 6. Bb5+ {Venice Attack}
+    6... Bd7
+     (6... Nbd7 7. Nf5 a6 8. Ba4 b5 9. Bb3 Nc5 10. Bg5 Bxf5 11. exf5 Be7
+      12. O-O O-O
+       (12... Nxb3 13. axb3)
+      13. Bxf6 Bxf6 14. Nd5)
+     (6... Nc6 $4 7. Nxc6 $1 7... bxc6 8. Bxc6+ Bd7 9. Bxa8 Qxa8)
+    7. Bxd7+ Nbxd7
+     (7... Qxd7 8. Nde2)
+    8. Nf5)
+  6. Be3 {English Attack}
+  6... e5
+   (6... e6 7. f3 Be7
+     (7... b5)
+    8. g4 O-O
+     (8... Qc7)
+     (8... b5)
+     (8... Nc6)
+     (8... h6)
+    9. g5 Nfd7 10. Qd2)
+   (6... Ng4 {Anti-English})
+   (6... b5)
+   (6... g6)
+   (6... Nc6 7. f3 e5
+     (7... e6 8. g4)
+     (7... g6 8. Qd2 Bg7 {TODO: move to Belezky Line (5... g6 6. Be3 Bg7 7. f3 Nc6 8. Qd2 a6)}
+      9. O-O-O O-O
+       (9... Bd7 10. g4)
+       (9... Nxd4 10. Bxd4)
+      10. g4)
+    8. Nb3 Be7
+     (8... Be6 9. Qd2)
+    9. Qd2)
+  7. Nb3 Be6
+   (7... Be7)
+  8. f4 exf4
+   (8... Qc7)
+   (8... Be7)
+  9. Bxf4 Nc6
+   (9... Be7 10. Qd2 Nc6
+     (10... O-O)
+    11. O-O-O)
+  10. Qe2 Be7
+   (10... Ne5 11. h3)
+  11. h3)
+ (2... e6 {French Variation}
+  3. d4
+   (3. c3 {Delayed Alapin Variation with e6})
+  3... cxd4 4. Nxd4 a6 {Kan Variation}
+   (4... Nc6 {Taimanov Variation}
+    5. Nc3)
+   (4... Nf6 {Normal})
+   (4... Bc5 {Paulsen-Basman Defense})
+  5. c4 {Maroczy Bind}
+  5... Qc7
+   (5... Nf6)
+   (5... Nc6)
+  6. Nc3 Nf6
+   (6... Nc6)
+   (6... b6)
+  7. a3)
+ (2... g6 {Hyperaccelerated Dragon}
+  3. d4 {Hyperaccelerated Fianchetto}
+  3... cxd4
+   (3... Bg7 {Hyperaccelerated Pterodactyl}
+    4. dxc5 Qa5+ {Pterodactyl Defense: Western, Rhamphorhynchus}
+     (4... Nc6 {TODO})
+    5. c3 Qxc5 6. Na3 Nf6
+     (6... a6 7. Be3 Qc7 8. Nc4)
+     (6... Qc7 7. Nb5 Qd8 8. Bf4 d6 9. e5 a6 10. Qa4 Bd7 11. exd6)
+     (6... d6 7. Be3)
+     (6... Nc6 7. Nc4 Nf6
+       (7... b5 8. Be3 Qh5 9. Na3 a6 10. Be2)
+       (7... d6 8. Be3 Qh5 9. h3)
+      8. Be3 Qh5 9. Be2 Nxe4
+       (9... Ng4 10. Bc1 Qc5 11. O-O)
+       (9... d6 10. Ng5 Bg4
+         (10... Qh4 11. g3 Qh6 12. h4)
+        11. f3)
+       (9... O-O 10. Ng5)
+       (9... Qg4 10. Ng5 Qxg2 11. Bf3)
+      10. Ng5 Qh4 11. g3 Qxg5 12. Bxg5 Nxg5 13. h4)
+     (6... Bxc3+ 7. bxc3 Qxc3+ 8. Qd2 Qxa1 9. Nb5 Na6 10. Nc3)
+    7. Nb5)
+  4. Nxd4 Bg7
+   (4... Nc6 {transposes into 2... Nc6 3. d4 cxd4 4. Nxd4 g6})
+  5. c4 Nc6 {TODO: move prep to main move order and insert transposition link}
+   (5... d6 {TODO})
+   (5... Nf6 {TODO})
+   (5... Qb6 6. Nb5 a6 7. Be3 Qa5+
+     (7... Qd8 8. N5c3)
+     (7... Qc6 8. Nd4 Qxe4 9. Nc3 Qe5
+       (9... Qh4 10. Nd5)
+      10. Nd5)
+    8. N5c3)
+  6. Be3 Nf6
+   (6... d6)
+  7. Nc3 O-O
+   (7... d6)
+   (7... Ng4 {Breyer Variation}
+    8. Qxg4 Nxd4 9. Qd1 Ne6
+     (9... e5)
+     (9... Nc6)
+    10. Rc1 Qa5
+     (10... O-O)
+     (10... d6)
+    11. Be2 b6
+     (11... d6)
+     (11... Bxc3+)
+    12. Qd5 Rb8
+     (12... Qxd5 13. cxd5 Nc5
+       (13... Nd4 14. Bd3)
+      14. f3)
+    13. Qxa5 bxa5 14. b3)
+  8. Be2 d6
+   (8... e6)
+  9. O-O Bd7
+   (9... a6 10. h3)
+   (9... Nxd4 10. Bxd4 Be6
+     (10... Bd7 11. Qd3 Bc6
+       (11... a5 {TODO: decide between b3 and Rad1})
+      12. b4)
+    11. f4)
+  10. h3)
+3. d4 {Open}
+ (3. Bb5 {Nyezhmetdinov-Rossolimo Attack})
+ (3. c3 {Delayed Alapin Variation against 2... Nc6})
+ (3. b4 {Portsmouth Gambit}
+  3... cxb4
+   (3... Nxb4 4. c3 Nc6 5. d4 cxd4 6. cxd4 d5
+     (6... e6 7. Nc3)
+     (6... d6 7. d5)
+    7. exd5 Qxd5 8. Nc3 {transposes into 3... cxb4 4. d4 d5 5. exd5 Qxd5 6. c4 bxc3 7. Nxc3})
+  4. d4 d5
+   (4... e6 5. d5 exd5
+     (5... Nb8)
+     (5... Nce7)
+     (5... Qf6 6. c3)
+    6. exd5)
+   (4... d6)
+  5. exd5 Qxd5 6. c4 bxc3
+   (6... Qe4+ 7. Be3)
+  7. Nxc3 Qa5
+   (7... Qd8 $4 8. d5 Nb8 9. Bb5+ Bd7 10. O-O Nf6
+     (10... a6)
+     (10... Bxb5 11. Nxb5 a6 12. Nc3 Nf6
+       (12... g6 13. Qd4 Nf6 14. Ba3 Bg7 15. Bxe7 $3)
+      13. Re1)
+     (10... g6 11. Qd4)
+    11. Re1)
+  8. Bd2
+   (8. Rb1)
+  8... e6
+   (8... Bg4 $2 9. d5 Nd4 10. Nb5 Bxf3 11. gxf3 Qb6 12. Nxd4 Qxd4
+    13. Bb5+ Kd8 14. Ba5+)
+   (8... Qd8 $2 9. d5 Nb8 10. Bb5+ Bd7 11. O-O Nf6
+    12. Re1 a6
+     (12... g6)
+     (12... Bxb5 $6 13. Nxb5 a6
+       (13... Nxd5 14. Ba5 b6
+         (14... Qxa5 15. Qxd5 Nc6 16. Ng5 {Stockfish likes it, Leela doesn't}
+          16... e6 17. Nxe6 $3 17... fxe6 18. Qxe6+)
+        15. Qa4)
+      14. Qa4)
+    13. Bf1)
+  9. Rb1 Bb4 10. Rxb4 Qxb4 11. d5 exd5 12. Nxd5 Qe4+ 13. Be3 Kf8
+   (13... Rb8)
+   (13... Nf6 14. Nc7+ {forks King and Rook}
+    14... Ke7 15. Be2 {unpins the Bishop on e3 to threaten Bc5#}
+    15... Rb8 $4 {trying to save the Rook 16. Bc5#}))
+3... cxd4 4. Nxd4 e5 {Löwenthal Variation}
+ (4... Nf6 5. Nc3 e5 {Lasker-Pelikan Variation / Sveshnikov Variation}
+  6. Ndb5 d6 7. Nd5 Nxd5 8. exd5 Nb8
+   (8... Ne7 9. c4 Ng6
+     (9... a6 $4 10. Qa4 Bd7 $4
+       (10... axb5 11. Qxa8)
+       (10... Qd7 11. Nc7+ Kd8 12. Qxd7+ Bxd7 13. Nxa8)
+      11. Nxd6#)
+     (9... Nf5 10. Bd3)
+    10. Qa4 Bd7 11. Qb4 Qb8
+     (11... Bxb5 12. Qxb5+ Qd7 13. a4)
+     (11... Bf5 12. h4)
+    12. h4 h5)
+  9. c4 Be7
+   (9... a6)
+  10. c5 O-O
+   (10... a6 11. cxd6 Bxd6 12. Nxd6+ Qxd6 13. Be2)
+   (10... dxc5 $4 11. d6)
+  11. Bd3)
+ (4... g6 {Accelerated Dragon})
+ (4... e6 {transposes into 2... e6 3. d4 cxd4 4. Nxd4 Nc6})
+ (4... Nxd4 5. Qxd4)
+ (4... d6)
+5. Nb5 d6 {Kalashnikov Variation}
+6. c4 a6 7. N5c3 *

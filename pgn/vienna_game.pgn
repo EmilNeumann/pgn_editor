@@ -1,0 +1,105 @@
+[Event "Preparation"]
+[Site "*"]
+[Date "*"]
+[Round "*"]
+[White "Player"]
+[Black "Aemyl"]
+[Result "*"]
+
+1. e4 e5 2. Nc3 {Vienna Game}
+2... Nc6 {Max-Lange Defense}
+ (2... Bc5 {Anderssen Defense}
+  3. Nf3
+   (3. Bc4 Nf6)
+   (3. f4 d6 4. Nf3 Nf6)
+   (3. d3 Nf6 {more often reached by 2... Nf6 3. d3 Bc5})
+  3... d6)
+3. Bc4
+ (3. Nf3 {transposes into the Three Knights Game})
+ (3. f4 {Vienna Gambit with 2... Nc6}
+  3... exf4 4. Nf3 {Knight Variation}
+   (4. d4 {Steinitz Gambit}
+    4... Qh4+ 5. Ke2 {Main Line}
+     (5. g3 $4 5... fxg3 6. Nf3 g2+ 7. Nxh4 gxh1=Q)
+    5... b6 {Fraser-Minckwitz Defense}
+    6. Nf3 $4
+     (6. a4 {TODO})
+     (6. Nb5 {TODO})
+     (6. Qd2 {TODO})
+    6... Ba6+ 7. Kd2 Qf2+ {TODO})
+  4... g5 5. d4 {Pierce Gambit}
+   (5. Bc4)
+   (5. h4)
+  5... g4 6. Ne5
+   (6. Bc4 gxf3 7. Qxf3
+     (7. O-O)
+    7... Qh4+ 8. g3 Nxd4 9. Qf2
+     (9. Qd3)
+     (9. gxh4)
+     (9. Qg2)
+    9... Qf6 10. Bxf4
+     (10. Nd5)
+     (10. O-O)
+    10... Bb4 11. O-O
+     (11. O-O-O Bxc3 12. bxc3 Ne6)
+     (11. e5 Qc6)
+    11... Bxc3 12. bxc3 Ne6)
+   (6. d5)
+   (6. Bxf4)
+  6... Qh4+ 7. Ke2
+   (7. g3 fxg3 8. Qxg4 Nxe5 9. Qxh4 Nf3+ 10. Ke2 Nxh4 11. hxg3 Ng6)
+   (7. Kd2 Nxd4 8. Qxg4
+     (8. Kd3)
+     (8. Nxg4)
+     (8. Bc4)
+    8... Qe7 9. Qxf4 Bh6)
+  7... d6 8. Nxc6 g3 9. h3
+   (9. Kd3 bxc6)
+   (9. Nb4 Bg4+)
+   (9. Bxf4 Bg4+)
+  9... bxc6 10. Ke1
+   (10. Kd3 Ne7)
+   (10. Qd3 Ne7)
+  10... Ne7 {prepares Ng6 to defend the f4 pawn})
+3... Nf6 4. d3
+ (4. Nf3 {transposes into 2. Nf3 Nc6 3. Nc3 Nf6 4. Bc4})
+4... Bc5 5. f4
+ (5. Bg5 h6 6. Bh4 d6 7. Nd5
+   (7. h3)
+   (7. Nf3)
+   (7. Nge2)
+  7... g5 8. Bg3 Nxd5 9. Bxd5 Ne7 10. Bb3 Ng6 11. Qh5
+   (11. Qf3)
+   (11. Ne2)
+  11... Qf6 {TODO})
+ (5. Nf3 {transposes into the Giuoco Pianissimo, Four Knights Variation})
+ (5. h3 {TODO})
+ (5. Be3 {TODO})
+ (5. Nge2 $2 5... Ng4 6. O-O Qh4 7. h3 Nxf2 8. Rxf2 Qxf2+ 9. Kh1
+   (9. Kh2)
+  9... d6 10. Nd5
+   (10. Na4 Bg4 11. Nxc5
+     (11. d4 Nxd4)
+    11... Bxe2)
+  10... Bg4 11. d4
+   (11. Nxc7+ Kd7)
+  11... Nxd4 12. Be3 Bxe2 {TODO})
+5... d6 6. Nf3
+ (6. f5 Nd4 7. Nf3
+   (7. Bg5 c6)
+   (7. g4 d5 {extremely rare top engine move}
+    8. exd5
+     (8. Nxd5 Nxd5 9. Bxd5 Qh4+ 10. Kd2 {TODO})
+    8... O-O 9. g5
+     (9. Nf3 b5)
+     (9. Bg5 b5)
+    9... b5)
+  7... c6 8. Nxd4
+   (8. Bg5)
+  8... exd4 9. Ne2
+   (9. Na4 Bb4+ 10. c3 Ba5 11. b4 Bc7 12. cxd4
+     (12. b5 d5)
+     (12. Bb3 b5 13. Nb2 dxc3)
+    12... b5)
+  9... d5 10. exd5 cxd5 11. Bb5+ Bd7 12. Bxd7+ Qxd7 13. O-O h6 {O-O on the next turn})
+6... a5 {extremely rare top engine move} *

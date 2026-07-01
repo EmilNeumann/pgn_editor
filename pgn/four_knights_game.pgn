@@ -1,0 +1,60 @@
+[Event "Preparation"]
+[Site ""]
+[Date ""]
+[Round ""]
+[White "Player"]
+[Black "Aemyl"]
+[Result ""]
+
+1. e4 e5 2. Nf3 Nc6 3. Nc3 {Three Knights Game}
+3... Nf6 {Four Knights Game}
+4. Bc4 {Italian Variation}
+ (4. d4 {Scotch Variation}
+  4... exd4 5. Nxd4 Bb4 6. Nxc6 bxc6 7. Bd3 {TODO: decide between O-O and d5}
+   (7. Bd2 Qe7))
+ (4. Bb5 {Spanish Variation}
+  4... Bb4 {Double Spanish}
+  5. Bxc6
+   (5. O-O)
+   (5. d3)
+   (5. a3)
+  5... dxc6 6. Nxe5
+   (6. d3)
+   (6. O-O)
+   (6. a3)
+  6... Qe7 7. d4
+   (7. Nf3)
+   (7. Nd3)
+   (7. f4)
+  7... Nxe4 8. O-O
+   (8. Bd2)
+   (8. Qd3)
+   (8. Qf3)
+  8... Nxc3 9. bxc3 Bd6 10. Re1 Be6 11. c4 Bxe5 12. Rxe5 O-O-O
+  13. d5 Qc5 14. Bg5 Rd7)
+4... Nxe4 5. Nxe4
+ (5. Bxf7+ {Noa Gambit}
+  5... Kxf7 6. Nxe4 d5 7. Neg5+
+   (7. Ng3)
+   (7. Nc3)
+  7... Kg8 8. d3
+   (8. d4 h6 9. Nh3 Bg4 10. dxe5 Nxe5 11. Nhg1
+     (11. Nf4 c6)
+     (11. Bf4 $4 11... Nxf3+ 12. gxf3 Bxh3)
+    11... Qd6 12. h3
+     (12. Be3 Re8)
+     (12. Qd4 Re8)
+    12... Bh5 13. g4
+     (13. Be3 Re8)
+    13... Bg6)
+  8... h6)
+5... d5 $1 6. Bxd5
+ (6. Bd3 dxe4 7. Bxe4)
+6... Qxd5 7. Nc3
+ (7. d3 Bg4 8. h3
+   (8. O-O)
+  8... Bh5 9. g4
+   (9. O-O)
+   (9. Be3)
+  9... Bg6)
+7... Qd6 *
