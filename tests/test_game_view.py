@@ -42,9 +42,21 @@ class WindowOptionsTests(unittest.TestCase):
 
         window.cycle_font_size()
         self.assertEqual(window.font_size, 18)
+        self.assertGreater(len(window.visible_nodes), 0)
 
         window.cycle_font_type()
         self.assertEqual(window.font_type, 'consolas')
+        self.assertGreater(len(window.visible_nodes), 0)
+
+    def test_game_view_uses_latest_window_font(self):
+        window = FakeWindow()
+        view = GameView(window)
+
+        window.font = 'first-font'
+        self.assertEqual(view.font_view, 'first-font')
+
+        window.font = 'second-font'
+        self.assertEqual(view.font_view, 'second-font')
 
 
 if __name__ == '__main__':

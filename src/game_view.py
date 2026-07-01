@@ -27,9 +27,7 @@ class GameView:
 
     @property
     def font_view(self):
-        if self.font is None:
-            self.font = self.window.font
-        return self.font
+        return self.window.font
 
     def draw(self):
         surface = self.surface_view

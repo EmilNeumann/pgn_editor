@@ -68,6 +68,7 @@ class Window:
         self.font_size = config.FONT_SIZE_OPTIONS[next_index]
         if self.surface is not None:
             self.font = pygame.font.SysFont(self.font_type, self.font_size)
+        self.refresh_tree_layout()
 
     def cycle_font_type(self):
         index = config.FONT_TYPE_OPTIONS.index(self.font_type)
@@ -75,6 +76,12 @@ class Window:
         self.font_type = config.FONT_TYPE_OPTIONS[next_index]
         if self.surface is not None:
             self.font = pygame.font.SysFont(self.font_type, self.font_size)
+        self.refresh_tree_layout()
+
+    def refresh_tree_layout(self):
+        if self.selected_node is None:
+            return
+        self.update_treeview()
 
     def update_treeview(self):
         self.visible_nodes.clear()
@@ -90,7 +97,13 @@ class Window:
                 tree_node.text = tree_node.base_text
                 if not tree_node.expanded and len(tree_node.children) > 1:
                     tree_node.text += f' ({tree_node.get_subtree_size()})'
-                tree_node.width = len(tree_node.text) * config.CHAR_WIDTH
+                if self.font is not None:
+                    text_surface = self.font.render(tree_node.text, False, '#ffffff')
+                    tree_node.width = text_surface.get_width()
+                    tree_node.height = text_surface.get_height()
+                else:
+                    tree_node.width = len(tree_node.text) * config.CHAR_WIDTH
+                    tree_node.height = config.CHAR_HEIGHT
                 self.visible_nodes.append(tree_node)
                 x += tree_node.width + config.CHAR_WIDTH
 
