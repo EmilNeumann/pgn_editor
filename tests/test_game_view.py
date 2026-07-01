@@ -1,6 +1,7 @@
 import unittest
 
 from src.game_view import GameView
+from src.window import Window
 
 
 class FakeSurface:
@@ -21,6 +22,8 @@ class FakeWindow:
         self.mode = type('Mode', (), {'show_list': False, 'show_board': False, 'show_tree': False, 'show_move_list': False, 'active_square': None})()
         self.selected_node = None
         self.visible_nodes = []
+        self.font_size = 15
+        self.font_type = 'arial'
 
 
 class GameViewTests(unittest.TestCase):
@@ -31,6 +34,17 @@ class GameViewTests(unittest.TestCase):
         view.draw()
 
         self.assertIn(('fill', '#000000'), window.surface.calls)
+
+
+class WindowOptionsTests(unittest.TestCase):
+    def test_cycle_font_size_and_type(self):
+        window = Window()
+
+        window.cycle_font_size()
+        self.assertEqual(window.font_size, 18)
+
+        window.cycle_font_type()
+        self.assertEqual(window.font_type, 'consolas')
 
 
 if __name__ == '__main__':

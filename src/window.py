@@ -25,6 +25,8 @@ class Window:
         self.mode = ReplayMode(self)
         self.surface = None
         self.font = None
+        self.font_size = config.FONT_SIZE
+        self.font_type = config.FONT_TYPE
         self.visible_nodes = []
         self.selected_node = self.root
         self.treeview_pos = (config.BOARD_SIZE + config.BORDER_SIZE, 0)
@@ -37,7 +39,7 @@ class Window:
             (config.BOARD_SIZE + 700, config.BOARD_SIZE + 500),
             flags=pygame.RESIZABLE,
         )
-        self.font = pygame.font.SysFont(config.FONT_TYPE, config.FONT_SIZE)
+        self.font = pygame.font.SysFont(self.font_type, self.font_size)
         self.update_treeview()
         running = True
         while running:
@@ -45,12 +47,34 @@ class Window:
                 if event.type == pygame.QUIT:
                     running = False
                 if event.type == pygame.KEYDOWN:
-                    self.mode.key_down(event)
+                    self.handle_key(event)
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     self.mode.mouse_button_down(event)
             self.game_view.draw()
             pygame.display.flip()
         pygame.quit()
+
+    def handle_key(self, event):
+        if event.key == pygame.K_F1:
+            self.cycle_font_size()
+        elif event.key == pygame.K_F2:
+            self.cycle_font_type()
+        else:
+            self.mode.key_down(event)
+
+    def cycle_font_size(self):
+        index = config.FONT_SIZE_OPTIONS.index(self.font_size)
+        next_index = (index + 1) % len(config.FONT_SIZE_OPTIONS)
+        self.font_size = config.FONT_SIZE_OPTIONS[next_index]
+        if self.surface is not None:
+            self.font = pygame.font.SysFont(self.font_type, self.font_size)
+
+    def cycle_font_type(self):
+        index = config.FONT_TYPE_OPTIONS.index(self.font_type)
+        next_index = (index + 1) % len(config.FONT_TYPE_OPTIONS)
+        self.font_type = config.FONT_TYPE_OPTIONS[next_index]
+        if self.surface is not None:
+            self.font = pygame.font.SysFont(self.font_type, self.font_size)
 
     def update_treeview(self):
         self.visible_nodes.clear()

@@ -45,6 +45,7 @@ class GameView:
             if self.window.mode.show_move_list:
                 self.draw_move_list()
             self.draw_info()
+        self.draw_options_panel()
 
     def draw_list(self):
         pass
@@ -123,6 +124,20 @@ class GameView:
                 background,
             )
             self.surface_view.blit(text_surface, node.position)
+
+    def draw_options_panel(self):
+        panel_y = config.BOARD_SIZE + config.BORDER_SIZE
+        width = getattr(self.surface_view, 'get_width', lambda: 0)()
+        height = getattr(self.surface_view, 'get_height', lambda: 0)()
+        if isinstance(self.surface_view, pygame.Surface):
+            pygame.draw.rect(self.surface_view, '#202020', (0, panel_y, width, max(120, height - panel_y)))
+        label = f'Font size: {self.window.font_size}  Font type: {self.window.font_type}'
+        if self.font_view is not None:
+            text_surface = self.font_view.render(label, False, '#ffffff', '#202020')
+            self.surface_view.blit(text_surface, (config.BORDER_SIZE, panel_y + 10))
+            help_text = 'F1: size  F2: type'
+            help_surface = self.font_view.render(help_text, False, '#cccccc', '#202020')
+            self.surface_view.blit(help_surface, (config.BORDER_SIZE, panel_y + 40))
 
     def get_arrows(self):
         if not self.window.mode.show_arrows:

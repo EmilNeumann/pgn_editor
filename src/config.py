@@ -7,4 +7,6 @@ CHAR_WIDTH = 15
 CHAR_HEIGHT = 23
 FONT_SIZE = 15
 FONT_TYPE = 'arial'
+FONT_SIZE_OPTIONS = [12, 15, 18, 22]
+FONT_TYPE_OPTIONS = ['arial', 'consolas', 'verdana']
 PLAYER_NAME = 'Aemyl'
