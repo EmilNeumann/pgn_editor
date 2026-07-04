@@ -13,3 +13,6 @@ This project is still in the pre-version-numbers alpha.
 - Editing functionality
 - File dialogs
 - ...
+
+## License
+GNU AGPLv3
