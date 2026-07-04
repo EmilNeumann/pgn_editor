@@ -4,6 +4,11 @@
 import chess.pgn
 
 
+def shorten_fen(fen: str):
+    *parts, _, _ = fen.split()  # remove half move clock and full move number
+    return ' '.join(parts)
+
+
 def get_move_list(node):
     pgn = str(chess.pgn.Game.from_board(node.board()))
     return pgn.rpartition("\n")[-1]
@@ -20,9 +25,7 @@ def show_node_info(node):
 
 
 def get_positions(node, positions: dict[str, list]):
-    fen = node.board().fen()
-    *parts, _, _ = fen.split()  # remove half move clock and full move number
-    fen = ' '.join(parts)
+    fen = shorten_fen(node.board().fen())
     positions[fen] = positions.get(fen, [])
     positions[fen].append(node)
     for child_node in node.variations:
@@ -67,7 +70,7 @@ def show_malformed_transpositions(positions: dict[str, list]):
 
 
 def main():
-    with open('pgn/jaenisch_gambit.pgn') as f:
+    with open('pgn/french_defense.pgn') as f:
         game = chess.pgn.read_game(f)
     positions = {}
     get_positions(game, positions)
@@ -77,3 +80,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+    input("press Enter to exit. ")
