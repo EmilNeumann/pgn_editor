@@ -349,6 +349,7 @@ class Window:
             flags=pygame.RESIZABLE
             # flags=pygame.FULLSCREEN
         )
+        pygame.display.set_caption("PGN Editor")
         self.font = pygame.font.SysFont('sourcecodepro', 16)
         self.update_treeview()
         running = True
@@ -377,7 +378,9 @@ class Window:
                 tree_node.position = (x, y)
                 tree_node.text = tree_node.base_text
                 if not tree_node.expanded and len(tree_node.children) > 1:
-                    tree_node.text += f" ({len(tree_node.children)}/{tree_node.get_subtree_lines()}/{tree_node.get_subtree_size()})"
+                    tree_node.text += f" ({len(tree_node.children)}"
+                    tree_node.text += f"/{tree_node.get_subtree_lines()}/"
+                    tree_node.text += f"{tree_node.get_subtree_size()})"
                 tree_node.width = len(tree_node.text) * CHAR_WIDTH
                 self.visible_nodes.append(tree_node)
                 x += tree_node.width + CHAR_WIDTH
