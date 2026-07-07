@@ -20,8 +20,8 @@ import transpositions
 BORDER_SIZE = 15
 SQUARE_SIZE = 45
 BOARD_SIZE = SQUARE_SIZE*8 + BORDER_SIZE*2
-CHAR_WIDTH = 8
-CHAR_HEIGHT = 17
+CHAR_WIDTH = 10
+CHAR_HEIGHT = 21
 PLAYER_NAME = "Aemyl"
 
 
@@ -138,7 +138,14 @@ class TreeNode:
     
     def get_subtree_size(self):
         return len(self.children) + sum(
-            child.get_subtree_size() for child in self.children
+            child.get_subtree_size()
+            for child in self.children
+        )
+    
+    def get_subtree_lines(self):
+        return (len(self.children) == 0) + sum(
+            child.get_subtree_lines()
+            for child in self.children
         )
 
 
@@ -178,17 +185,24 @@ class FileSelectorMode(EventHandler):
                 (self.selected_index or 0) + 1
             )
         if event.key == pygame.K_RETURN:
-            pass  # TODO
+            if self.selected_index is None:
+                return
+            if self.selection == Selection.FILES:
+                pass  # TODO: determine selected file, update_list()
+            elif self.selection == Selection.GAMES:
+                pass  # TODO: open selected game and switch to ReplayMode
     
     def mouse_button_down(self, event):
-        pass  # TODO
+        pass  # TODO: convert y position to list index
     
     def update_list(self):
         self.items.clear()
         if self.selection == Selection.FILES:
-            pass  # TODO
+            for filename in os.listdir(self.directory):
+                if filename.endswith('.pgn'):
+                    self.items.append(filename)
         if self.selection == Selection.GAMES:
-            pass  # TODO
+            pass  # TODO: get games from selected file and include a summary in the list
 
 
 class BoardEventHandler(EventHandler):
@@ -327,8 +341,6 @@ class Window:
         self.visible_nodes = []
         self.selected_node = self.root
         self.treeview_pos = (BOARD_SIZE + BORDER_SIZE, 0)
-        self.tree_text = []
-        # self.init_treeview()
     
     def mainloop(self):
         pygame.init()
@@ -337,7 +349,7 @@ class Window:
             flags=pygame.RESIZABLE
             # flags=pygame.FULLSCREEN
         )
-        self.font = pygame.font.SysFont('sourcecodepro', 13)
+        self.font = pygame.font.SysFont('sourcecodepro', 16)
         self.update_treeview()
         running = True
         while running:
@@ -352,41 +364,6 @@ class Window:
             pygame.display.flip()
         pygame.quit()
     
-    def init_treeview(self):
-        self.tree_text = []
-        lines = []  # list of tuples (indentation, moves)
-        current_line = []  # list of tuples (board, move)
-        start_node = self.node
-        if start_node.parent is None:
-            start_node = start_node.variation(0)
-        unprocessed_nodes = [(0, start_node)]
-        while unprocessed_nodes:
-            indentation, node = unprocessed_nodes.pop()
-            current_line.append((node.parent.board(), node.move))
-            match len(node.variations):
-                case 0:
-                    lines.append((indentation, current_line))
-                    current_line = []
-                    indentation -= 1
-                case 1:
-                    unprocessed_nodes.append((indentation, node.variation(0)))
-                case _:
-                    lines.append((indentation, current_line))
-                    current_line = []
-                    indentation += 1
-                    for child_node in reversed(node.variations):
-                        unprocessed_nodes.append((indentation, child_node))
-        for indentation, line in lines:
-            text = "  " * indentation
-            board = line[0][0]
-            if board.turn == chess.BLACK:
-                text += f"{board.fullmove_number}... "
-            for board, move in line:
-                if board.turn == chess.WHITE:
-                    text += f"{board.fullmove_number}. "
-                text += board.san(move) + ' '
-            self.tree_text.append(text.rstrip())
-    
     def update_treeview(self):
         self.visible_nodes.clear()
         self.selected_node.make_visible()
@@ -400,7 +377,7 @@ class Window:
                 tree_node.position = (x, y)
                 tree_node.text = tree_node.base_text
                 if not tree_node.expanded and len(tree_node.children) > 1:
-                    tree_node.text += f" ({tree_node.get_subtree_size()})"
+                    tree_node.text += f" ({len(tree_node.children)}/{tree_node.get_subtree_lines()}/{tree_node.get_subtree_size()})"
                 tree_node.width = len(tree_node.text) * CHAR_WIDTH
                 self.visible_nodes.append(tree_node)
                 x += tree_node.width + CHAR_WIDTH
@@ -418,7 +395,7 @@ class Window:
             self.draw_info()
     
     def draw_list(self):
-        pass
+        pass  # TODO: iterate over self.mode.items and print each in a new line, highlighting the selected item
     
     def draw_board(self):
         board = self.selected_node.game_node.board()
@@ -479,13 +456,6 @@ class Window:
             self.surface.blit(comment_surface, (0, BOARD_SIZE + BORDER_SIZE + CHAR_HEIGHT * i))
     
     def draw_tree_view(self):
-        # total_height = 0
-        # for text in self.tree_text:
-        #     text_surface = self.font.render(
-        #         text, False, "#ffffff", "#000000"
-        #     )
-        #     self.surface.blit(text_surface, (BOARD_SIZE + BORDER_SIZE, total_height))
-        #     total_height += text_surface.get_height()
         for node in self.visible_nodes:
             background = "#000000"
             if node is self.selected_node:
