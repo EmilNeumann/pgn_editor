@@ -1,0 +1,50 @@
+[Event "Preparation"]
+[Site "*"]
+[Date "*"]
+[Round "*"]
+[White "Player"]
+[Black "Aemyl"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. c3 {Ponziani Opening}
+3... Nf6 {Jaenisch Counterattack}
+ (3... f5 {Ponziani Countergambit})
+4. d4
+ (4. d3)
+ (4. Bd3)
+ (4. Qc2)
+ (4. Bc4 {Neumann Gambit}
+  4... Nxe4 5. d4
+   (5. O-O)
+   (5. d3)
+   (5. Qe2 $6 5... d5)
+  5... d5 6. Bb5
+   (6. Bb3)
+  6... exd4 7. Nxd4 Bd7)
+4... Nxe4 5. d5 Bc5 {Vukovic Gambit}
+6. dxc6
+ (6. Be3)
+6... Bxf2+ 7. Ke2 Bb6 8. Qd5
+8... Nf2 9. cxb7
+ (9. Rg1 O-O 10. cxb7 Bxb7 11. Qxb7 Qf6 12. Be3
+   (12. Na3 Rab8)
+   (12. Qd5 c6)
+   (12. Nbd2 Rab8)
+   (12. Bg5 Qg6)
+   (12. Qa6 e4)
+  12... Rab8 13. Qd5
+   (13. Qa6 Ng4)
+   (13. Qe4 Nxe4)
+  13... Bxe3 14. Kxe3 Ng4+ 15. Ke2
+   (15. Kd2 Rxb2+)
+   (15. Kd3 e4+ 16. Kxe4
+     (16. Qxe4 Nf2+)
+    16... Rfe8+ 17. Kd3 Qg6+ 18. Kd4
+     (18. Kd2 Rxb2+)
+    18... c5+ 19. Kxc5 Ne3 {attacks the queen and threatens Qb6#}
+    20. Qd6 {the only move that doesn't lose queen or king on the very next move}
+    20... Qf5+ 21. Kd4 Nc2+ 22. Kc4 Qb5#)
+   (15. Ke4 $4 15... Qg6#)
+  15... Rxb2+)
+ (9. Qxe5+)
+9... Bxb7 *

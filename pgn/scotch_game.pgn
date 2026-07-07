@@ -1,0 +1,124 @@
+[Event "Preparation"]
+[Site ""]
+[Date ""]
+[Round ""]
+[White "Player"]
+[Black "Aemyl"]
+[Result ""]
+
+1. e4 e5 2. Nf3 Nc6 3. d4 {Scotch Game}
+3... exd4
+ (3... f5 4. exf5
+   (4. d5 fxe4 5. dxc6 exf3 $1 6. Qxf3
+     (6. cxd7+ Bxd7 {TODO})
+    6... bxc6 7. Bc4 $2
+     (7. Nc3 $2 7... Nf6 8. Bg5 d5 9. O-O-O Bd6)
+     (7. Qh5+ g6 8. Qxe5+ Qe7 9. Qxe7+
+       (9. Bf4 Bg7
+         (9... d6))
+      9... Nxe7)
+    7... Nf6)
+   (4. dxe5 fxe4 $1 5. Nd4
+     (5. Ng5 Nxe5 {TODO})
+     (5. Nfd2 Nxe5 {TODO})
+    5... Nxe5 {TODO})
+   (4. Nxe5 fxe4 5. Qh5+
+     (5. Nxc6 {TODO})
+    5... g6 $1 6. Nxg6 $2 6... Nf6 $1 7. Qh4 $1 7... Nxd4 $1
+    8. Nxh8 Nxc2+ $1 9. Kd1 $1 9... Nxa1 $1 10. Bg5 Bg7 $1
+    11. Bxf6 $6 11... Qxf6 $1 12. Qxe4+ $1
+     (12. Qh5+ $2 12... Ke7)
+     (12. Qxf6 $2 12... Bxf6 13. Nc3 Bxh8)
+    12... Kf8 13. Bc4 $2
+     (13. Nc3 {TODO})
+     (13. Qxh7 $6 13... Bxh8)
+    13... d5 14. Qxd5 $4
+     (14. Bxd5 Bxh8)
+    14... Bg4+ 15. f3
+     (15. Kc1 Qxb2#)
+    15... Rd8)
+  4... e4 5. Ne5 Nf6 6. Nxc6
+   (6. Bg5 d6 7. Bxf6
+     (7. Nxc6 bxc6)
+    7... Qxf6 8. Qh5+ Ke7 9. Nxc6+
+     (9. Ng6+ hxg6 10. Qxh8 Nxd4 11. Na3)
+    9... bxc6)
+  6... bxc6 {TODO})
+4. Nxd4
+ (4. Bc4 {Scotch Gambit}
+  4... Nf6 {Dubois Reti Defense}
+  5. e5 {Modern Variation / Advance Variation}
+   (5. O-O {Classical Variation}
+    5... Nxe4 {Double Gambit Accepted}
+    6. Re1
+     (6. Nc3)
+    6... d5 7. Bxd5 Qxd5 8. Nc3 {Anderssen Attack}
+    8... Qh5 9. Nxe4 Be6 10. Bg5
+     (10. Neg5 O-O-O 11. Nxe6 fxe6 12. Rxe6 Bd6)
+    10... Bd6 11. Nxd6+
+     (11. Bf6 Bxh2+ 12. Nxh2 Qxd1 13. Raxd1 gxf6 14. Nxf6+ Kf8 15. Nf3 Rd8)
+    11... cxd6 12. Bf4 {TODO: decide between Qd5 and Qc5})
+   (5. Nxd4)
+   (5. Ng5)
+   (5. c3)
+  5... d5 6. Bb5
+   (6. exf6)
+   (6. exd6)
+  6... Ne4 {Max Lange Attack}
+  7. Nxd4 Bd7
+   (7... Bc5)
+  8. Bxc6
+   (8. Nxc6))
+4... Nf6 {Schmidt Variation}
+ (4... Bc5 {Classical Variation})
+ (4... Qh4 {Steinitz Variation})
+5. Nxc6
+ (5. Nc3 {transposes into 3. Nc3 Nf6 4. d4 exd4 5. Nxd4})
+5... bxc6 6. e5 {Mieses Variation}
+ (6. Nc3 Bb4 {transposes into 3. Nc3 Nf6 4. d4 exd4 5. Nxd4 Bb4 6. Nxc6 bxc6})
+ (6. Bd3 d5 7. exd5
+   (7. e5 Ng4)
+   (7. O-O dxe4)
+  7... cxd5 8. O-O Be7 9. Re1
+   (9. Nc3)
+   (9. Bg5)
+   (9. c4)
+   (9. h3)
+  9... O-O 10. Bg5
+   (10. Nc3)
+   (10. h3)
+   (10. Bf4)
+   (10. Qe2)
+  10... Rb8 {rare alternative to h6})
+6... Qe7 7. Qe2
+ (7. Bf4)
+7... Nd5 8. c4
+ (8. h4 f6 {easier to prepare than the other strong moves}
+  9. c4
+   (9. exf6 Nxf6)
+  9... Ba6 10. exf6
+   (10. Rh3 Nb6 11. exf6
+     (11. b3)
+     (11. Re3)
+     (11. Nd2)
+    11... Qxe2+ 12. Bxe2 Bxc4 13. Re3+
+     (13. fxg7 Bxg7)
+     (13. Bxc4 Nxc4)
+    13... Kd8 14. fxg7
+     (14. b3 Bxe2)
+    14... Bxg7 15. Nc3 a5)
+  10... Nxf6)
+8... Ba6 9. b3
+ (9. Nd2)
+9... g6 10. Bb2
+ (10. f4)
+ (10. g3)
+ (10. Ba3)
+10... Bg7 11. g3
+ (11. Nd2)
+11... O-O 12. Bg2 Rae8 13. O-O Bxe5 14. Qxe5
+ (14. Bxe5)
+14... Qxe5 15. Bxe5 Rxe5 16. cxd5 Bxf1 17. Kxf1 cxd5 18. Nc3
+ (18. f4)
+ (18. Nd2)
+18... c6 *
