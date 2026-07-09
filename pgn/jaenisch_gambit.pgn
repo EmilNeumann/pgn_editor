@@ -252,7 +252,7 @@
            (19. Kg1 Nxe2#)
           19... Nxe2 20. Kxe2 Bg4+ 21. Ke1
            (21. Ke3 d4+ 22. cxd4 Qf4#)
-          21... Rae8)
+          21... Rae8 22. c4 d4)
         13... Qxb5 {this time, black wins material by trading down}
         14. Nxd4
          (14. Qxb5 Nxb5)
@@ -419,14 +419,17 @@
     9. Qe2 Nf6 $1 10. d3 O-O $1 11. dxe4 $6 11... Nxe4 $3
     12. Nxe4 Ba6 $1 13. Qxa6
      (13. c4 $6 13... Rae8 14. f3 d5 15. b3 dxe4 16. f4 Rd8)
-    13... Qxe4+ $1 14. Be3 Rxf2
+    13... Qxe4+ $1 14. Be3 Rxf2 $3
      (14... Bxe3 15. fxe3 Qxh1)
     15. Qd3
-     (15. Kxf2 $6 {[m-11]} 15... Bxe3+ 16. Ke1 Bf2+ 17. Kxf2
+     (15. Kxf2 $6 {[m-11]} 15... Bxe3+ 16. Ke1 Bf2+ $3 17. Kxf2
        (17. Kf1 Rf8)
        (17. Kd2 Qe3+ 18. Kd1 Qe1#)
        (17. Kd1 Qe1#)
-      17... Rf8+)
+      17... Rf8+ 18. Nf3 Rxf3+ 19. Kg1 Qe3+ 20. Kg2 Rf2+ $1 21. Kh3 Qe6+
+      22. Kh4 g5+ 23. Kxg5 Rf5+ 24. Kg4
+       (24. Kh4 Qh6+ 25. Kg4 Qh5#)
+      24... Qe4+ 25. Kh3 Rh5#)
     15... Qg2 16. Bxf2 Bxf2+ $1 17. Kd2 Bxg1+ 18. Kc3 Qxh1 $1
     19. Qf1 Re8 20. Qxg1 Qf3+ 21. Kd2 Re2+ 22. Kc1 Qe4 23. Qd1 Qe3+
     24. Kb1 Re1)
@@ -706,14 +709,14 @@
     6... d5)
    (5. d5 $2 5... exf3 6. dxc6 dxc6 7. Qxd8+ Kxd8 9. Bf1 fxg2 10. Bxg2 {TODO})
    (5. Bg5 Be7 6. Bxe7
-     (6. Bxc6 bxc6 7. Bxe7 $1 7... Nxe7 {transposes into 6. Bxe7 Nxe7 7. Bxc6 bxc6})
+     (6. Bxc6 bxc6 7. Bxe7 $1 7... Nxe7 {transposes into 6. Bxe7 Ngxe7 7. Bxc6 bxc6})
     6... Ngxe7
      (6... Qxe7 {tricky}
       7. Bxc6 $1 7... bxc6
        (7... exd4 8. Bxe4 Qxe4+ 9. Kd2
          (9. Kf1 $6 {TODO})
          (9. Qe2 $2 9... Qxe2+ 10. Kxe2 c5)
-        9... Ne7 {}
+        9... Ne7 {tricky}
          (9... Qf4+ 10. Ke2 $1
            (10. Ke1 $2 10... Ne7)
            (10. Kd3 $2 10... b6))
