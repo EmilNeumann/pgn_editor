@@ -1,6 +1,7 @@
 # Portable Game Notation Editor
 
-A small Python application for exploring and reviewing chess games from PGN files. The project renders a board, supports move navigation, and shows a tree-style view of the game variations.
+A small Python application for exploring and reviewing chess games from PGN files. 
+The project renders a board, supports move navigation, and shows a tree-style view of the game variations.
 
 ## Features
 
@@ -47,4 +48,5 @@ From the project root:
 
 ## Notes
 
-The current project is focused on visualization and interaction with PGN game trees. It is a lightweight tool for studying openings and variations rather than a full chess engine.
+The current project is focused on visualization and interaction with PGN game trees. 
+It is a lightweight tool for studying openings and variations rather than a full chess engine.
