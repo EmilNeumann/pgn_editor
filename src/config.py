@@ -1,4 +1,4 @@
-OPENING_PGN = 'pgn/scotch_game.pgn'
+OPENING_PGN = 'pgn/jaenisch_gambit.pgn'
 PIECE_SIZE = 65
 BORDER_SIZE = 25
 SQUARE_SIZE = 65

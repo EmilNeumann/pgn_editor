@@ -83,7 +83,7 @@ class Window:
             return
         self.update_treeview()
 
-    def update_treeview(self):
+    def update_treeview(self): 
         self.visible_nodes.clear()
         self.selected_node.make_visible()
         lines = get_lines(self.root, 0)
