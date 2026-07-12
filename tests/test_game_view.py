@@ -24,6 +24,7 @@ class FakeWindow:
         self.visible_nodes = []
         self.font_size = 15
         self.font_type = 'arial'
+        self.show_options_panel = True
 
 
 class GameViewTests(unittest.TestCase):
@@ -47,6 +48,16 @@ class WindowOptionsTests(unittest.TestCase):
         window.cycle_font_type()
         self.assertEqual(window.font_type, 'consolas')
         self.assertGreater(len(window.visible_nodes), 0)
+
+    def test_tab_toggles_options_panel_visibility(self):
+        window = Window()
+        self.assertTrue(window.show_options_panel)
+
+        window.toggle_options_panel()
+        self.assertFalse(window.show_options_panel)
+
+        window.toggle_options_panel()
+        self.assertTrue(window.show_options_panel)
 
     def test_game_view_uses_latest_window_font(self):
         window = FakeWindow()

@@ -124,6 +124,8 @@ class GameView:
             self.surface_view.blit(text_surface, node.position)
 
     def draw_options_panel(self):
+        if not self.window.show_options_panel:
+            return
         panel_y = config.BOARD_SIZE + config.BORDER_SIZE + 54
         width = getattr(self.surface_view, 'get_width', lambda: 0)()
         height = getattr(self.surface_view, 'get_height', lambda: 0)()
@@ -134,7 +136,7 @@ class GameView:
         if self.font_view is not None:
             text_surface = self.font_view.render(label, False, '#ffffff', '#202020')
             self.surface_view.blit(text_surface, (config.BORDER_SIZE, panel_y + 8))
-            help_text = 'F1: size  F2: type'
+            help_text = 'F1: size  F2: type  Tab: hide/show'
             help_surface = self.font_view.render(help_text, False, '#cccccc', '#202020')
             self.surface_view.blit(help_surface, (config.BORDER_SIZE, panel_y + 28))
 

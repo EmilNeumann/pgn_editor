@@ -27,6 +27,7 @@ class Window:
         self.font = None
         self.font_size = config.FONT_SIZE
         self.font_type = config.FONT_TYPE
+        self.show_options_panel = True
         self.visible_nodes = []
         self.selected_node = self.root
         self.treeview_pos = (config.BOARD_SIZE + config.BORDER_SIZE, 0)
@@ -59,8 +60,13 @@ class Window:
             self.cycle_font_size()
         elif event.key == pygame.K_F2:
             self.cycle_font_type()
+        elif event.key == pygame.K_TAB:
+            self.toggle_options_panel()
         else:
             self.mode.key_down(event)
+
+    def toggle_options_panel(self):
+        self.show_options_panel = not self.show_options_panel
 
     def cycle_font_size(self):
         index = config.FONT_SIZE_OPTIONS.index(self.font_size)
