@@ -351,6 +351,7 @@ class Window:
         )
         pygame.display.set_caption("PGN Editor")
         self.font = pygame.font.SysFont('sourcecodepro', 16)
+        clock = pygame.time.Clock()
         self.update_treeview()
         running = True
         while running:
@@ -363,6 +364,7 @@ class Window:
                     self.mode.mouse_button_down(event)
             self.draw()
             pygame.display.flip()
+            clock.tick(60)
         pygame.quit()
     
     def update_treeview(self):
