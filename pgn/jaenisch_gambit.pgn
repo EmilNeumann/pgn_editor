@@ -182,8 +182,8 @@
   11... Qxf6 12. Bxf6 Rg8 13. g3
    (13. O-O)
   13... Rg6)
- (4. exf5 {Jaenisch Gambit Accepted}
-  4... e4 5. Bxc6
+ (4. exf5 $2 {Jaenisch Gambit Accepted}
+  4... e4 $1 5. Bxc6
    (5. Qe2 Qe7 $1 6. Bxc6 $1
      (6. Ng1 $2 6... Nd4 {attacks the queen, the bishop, the pawn on f5 and threatens to win the rook with Nxc2+}
       7. Qc4 $2 {temporarily defends everything except the f-pawn while attacking the knight and the c-pawn}
@@ -323,17 +323,17 @@
       8. Qe2
        (8. Nh3 Qe5 9. Be2 d5 10. d4 Bxd4)
       8... d5)
-     (6. d3 $4 6... Qxg2 7. Qh5+
+     (6. d3 $4 6... Qxg2 $1 7. Qh5+
        (7. dxe4 {TODO})
        (7. Bxc6 {TODO})
-      7... g6 8. fxg6 Nf6 9. g7+
+      7... g6 $1 8. fxg6 Nf6 $1 9. g7+
        (9. Qf5)
        (9. Qg5)
       9... Nxh5 10. gxh8=Q Qxh1
       11. Kf1 {defends the knight}
        (11. Bxc6)
        (11. Qg8)
-      11... d6 12. Qg8 {adds another defender to the knight}
+      11... d6 $1 12. Qg8 {adds another defender to the knight}
        (12. Bh6 Bh3+ 13. Ke2 O-O-O)
        (12. Bxc6+ bxc6)
       12... Bh3+ 13. Ke2 {unpins the knight and threatens Nxh3}
