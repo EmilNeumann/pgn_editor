@@ -14,6 +14,7 @@ import chess.svg
 import pygame
 
 import transpositions
+from treeview import TreeNode
 
 
 # BORDER = True
@@ -57,18 +58,6 @@ def get_text_color_from_nags(nags: set[int]) -> str:
     return "#ff00ff"
 
 
-def get_text_from_nags(nags: set[int]) -> str:
-    if not nags: return ""
-    if len(nags) > 1: return "[?]"
-    if chess.pgn.NAG_GOOD_MOVE in nags: return "!"
-    if chess.pgn.NAG_MISTAKE in nags: return "?"
-    if chess.pgn.NAG_BRILLIANT_MOVE in nags: return "!!"
-    if chess.pgn.NAG_BLUNDER in nags: return "??"
-    if chess.pgn.NAG_SPECULATIVE_MOVE in nags: return "!?"
-    if chess.pgn.NAG_DUBIOUS_MOVE in nags: return "?!"
-    return "[?]"
-
-
 def get_lines(tree_node, indentation):
     lines = []
     line = []
@@ -81,72 +70,6 @@ def get_lines(tree_node, indentation):
         for child in tree_node.children:
             lines.extend(get_lines(child, indentation + 1))
     return lines
-
-
-class TreeNode:
-    def __init__(self, game_node, parent):
-        self.game_node = game_node
-        self.parent = parent
-        self.expanded = False
-        self.base_text = ""
-        self.fen = transpositions.shorten_fen(game_node.board().fen())
-        if game_node.parent is not None:
-            board = game_node.parent.board()
-            if board.turn == chess.WHITE:
-                self.base_text += f"{board.fullmove_number}. "
-            elif len(parent.game_node.variations) > 1:
-                self.base_text += f"{board.fullmove_number}... "
-            self.base_text += board.san(game_node.move)
-            self.base_text += get_text_from_nags(game_node.nags)
-        self.children = [
-            TreeNode(child, self)
-            for child in game_node.variations
-        ]
-        # the following attributes are managed by the Window class
-        self.text = self.base_text
-        self.position = (0, 0)
-        self.width = CHAR_WIDTH * len(self.text)
-        self.height = CHAR_HEIGHT
-    
-    def expand(self):
-        self.expanded = True
-    
-    def collapse(self):
-        self.expanded = False
-    
-    def expand_all(self):
-        self.expand()
-        for child in self.children:
-            child.expand_all()
-    
-    def collapse_all(self):
-        for child in self.children:
-            child.collapse_all()
-        self.collapse()
-    
-    def toggle(self):
-        if self.expanded:
-            self.collapse()
-        else:
-            self.expand()
-    
-    def make_visible(self):
-        if self.parent is None:
-            return
-        self.parent.expand()
-        self.parent.make_visible()
-    
-    def get_subtree_size(self):
-        return len(self.children) + sum(
-            child.get_subtree_size()
-            for child in self.children
-        )
-    
-    def get_subtree_lines(self):
-        return (len(self.children) == 0) + sum(
-            child.get_subtree_lines()
-            for child in self.children
-        )
 
 
 class EventHandler:
@@ -329,12 +252,12 @@ class Window:
     def __init__(self):
         self.orientation = chess.WHITE
         with open('pgn/jaenisch_gambit.pgn') as f:
-            self.root = chess.pgn.read_game(f)
-            if self.root.headers["Black"] == PLAYER_NAME:
+            root = chess.pgn.read_game(f)
+            if root.headers["Black"] == PLAYER_NAME:
                 self.orientation = chess.BLACK
-        self.root = TreeNode(self.root, None)
-        self.positions = {}
-        transpositions.get_positions(self.root.game_node, self.positions)
+        self.root = TreeNode(root, None)
+        # self.positions = {}
+        # transpositions.get_positions(self.root.game_node, self.positions)
         self.mode = ReplayMode(self)
         self.surface = None
         self.font = None
@@ -384,6 +307,7 @@ class Window:
                     tree_node.text += f"/{tree_node.get_subtree_lines()}/"
                     tree_node.text += f"{tree_node.get_subtree_size()})"
                 tree_node.width = len(tree_node.text) * CHAR_WIDTH
+                tree_node.height = CHAR_HEIGHT
                 self.visible_nodes.append(tree_node)
                 x += tree_node.width + CHAR_WIDTH
     
