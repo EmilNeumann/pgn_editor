@@ -324,7 +324,13 @@
        (8. Nh3 Qe5 9. Be2 d5 10. d4 Bxd4)
       8... d5)
      (6. d3 $4 6... Qxg2 $1 7. Qh5+
-       (7. dxe4 {TODO})
+       (7. dxe4 $2 7... Qxh1 8. Kf1
+         (8. Qh5+ g6 9. fxg6 Qxg1+ 10. Ke2
+           (10. Kd2 Qxg6)
+          10... Qxg6)
+        8... Qxe4 9. Qh5+
+         (9. Nc3 Qxf5)
+        9... g6 10. fxg6 Qxg6)
        (7. Bxc6 {TODO})
       7... g6 $1 8. fxg6 Nf6 $1 9. g7+
        (9. Qf5)
