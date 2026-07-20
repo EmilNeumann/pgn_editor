@@ -26,15 +26,24 @@ CHAR_HEIGHT = 21
 PLAYER_NAME = "Aemyl"
 
 
+# use piece_type and color rather than a chess.Piece instance,
+# to make the cache more reliable
 @functools.cache
 def get_piece_surface(piece_type, color):
+    """
+    Return a pygame Surface with an SVG of the specified chess piece.
+    """
     piece = chess.Piece(piece_type, color)
-    piece_svg = chess.svg.piece(piece, size=45)
+    piece_svg = chess.svg.piece(piece, size=SQUARE_SIZE)
     buffer = io.BytesIO(piece_svg.encode())
     return pygame.image.load(buffer)
 
 
 def get_arrow_color_from_nags(nags: set[int]) -> str:
+    """
+    Translate numeric annotation glyphs (NAGs)
+    to colors for chess.svg.Arrow()
+    """
     if not nags: return "green"
     if len(nags) > 1: return "#ff00ff"
     if chess.pgn.NAG_GOOD_MOVE in nags: return "blue"
@@ -47,6 +56,10 @@ def get_arrow_color_from_nags(nags: set[int]) -> str:
 
 
 def get_text_color_from_nags(nags: set[int]) -> str:
+    """
+    Translate numeric annotation glyphs (NAGs)
+    to colors for pygame.font.Font.render()
+    """
     if not nags: return "#ffffff"
     if len(nags) > 1: return "#ff00ff"
     if chess.pgn.NAG_GOOD_MOVE in nags: return "#00bfff"
@@ -59,6 +72,13 @@ def get_text_color_from_nags(nags: set[int]) -> str:
 
 
 def get_lines(tree_node, indentation):
+    """
+    Group tree nodes into lines:
+    - if a node has no child nodes, the line ends
+    - if a node has only one child node, they should be on the same line
+    - if a node has multiple child nodes, each child node starts a new
+      line with increased indentation
+    """
     lines = []
     line = []
     while len(tree_node.children) == 1:
@@ -73,6 +93,10 @@ def get_lines(tree_node, indentation):
 
 
 class EventHandler:
+    """
+    Abstract base class.
+    Subclasses control how the user can interact with the program.
+    """
     def __init__(self, parent):
         self.parent: Window = parent
         self.show_list = False
@@ -91,6 +115,9 @@ class Selection(Enum):
 
 
 class FileSelectorMode(EventHandler):
+    """
+    This mode turns the window into a file dialog.
+    """
     def __init__(self, parent):
         super().__init__(parent)
         self.show_list = True
@@ -129,6 +156,9 @@ class FileSelectorMode(EventHandler):
 
 
 class BoardEventHandler(EventHandler):
+    """
+    Base class for event handlers that allow interaction with a chess board.
+    """
     def __init__(self, parent):
         super().__init__(parent)
         self.active_square = None
@@ -168,6 +198,9 @@ class BoardEventHandler(EventHandler):
 
 
 class ReplayMode(BoardEventHandler):
+    """
+    This mode allows the user to explore the entire game tree.
+    """
     def __init__(self, parent):
         super().__init__(parent)
         self.show_tree = True
@@ -202,6 +235,16 @@ class ReplayMode(BoardEventHandler):
 
 
 class PracticeMode(BoardEventHandler):
+    """
+    This mode is intended for practicing.
+    
+    The treeview is replaced by a move list that leads to the current
+    position, arrows are not shown in positions with multiple variations
+    and comments are only shown when the end of a line is reached.
+    
+    When this mode is entered, it remembers the current position, so the
+    user can jump back to it by pressing <R>.
+    """
     def __init__(self, parent, color):
         super().__init__(parent)
         self.show_arrows = False
@@ -215,7 +258,7 @@ class PracticeMode(BoardEventHandler):
         if event.key == pygame.K_f:
             self.parent.flip_board()
         if event.key == pygame.K_r:
-            # reset to root node
+            # reset to start node
             self.parent.selected_node = self.start_node
             if self.start_node.game_node.turn() != self.color:
                 self.parent.make_random_move()
@@ -287,6 +330,9 @@ class Window:
             clock.tick(60)
     
     def update_treeview(self):
+        """
+        Determine which nodes are visible and where they are.
+        """
         self.visible_nodes.clear()
         self.selected_node.make_visible()
         lines = get_lines(self.root, 0)
@@ -334,6 +380,10 @@ class Window:
         buffer = io.BytesIO(board_svg.encode())
         board_surface = pygame.image.load(buffer)
         self.surface.blit(board_surface, (0, 0))
+        # the board SVG already defines the pieces, but uses references
+        # to define their positions. pygame / SDL is apparently unable to
+        # handle these references, so this function needs to loop over
+        # the board and blit the pieces manually
         for file_index, rank_index in itertools.product(range(8), repeat=2):
             square = chess.square(file_index, rank_index)
             piece = board.piece_at(square)
