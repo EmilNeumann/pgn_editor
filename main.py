@@ -250,6 +250,13 @@ class PracticeMode(BoardEventHandler):
 
 class Window:
     def __init__(self):
+        self.surface = pygame.display.set_mode(
+            (BOARD_SIZE+700, BOARD_SIZE+500),
+            flags=pygame.RESIZABLE
+            # flags=pygame.FULLSCREEN
+        )
+        pygame.display.set_caption("PGN Editor")
+        self.font = pygame.font.SysFont('sourcecodepro', 16)
         self.orientation = chess.WHITE
         with open('pgn/jaenisch_gambit.pgn') as f:
             root = chess.pgn.read_game(f)
@@ -259,23 +266,13 @@ class Window:
         # self.positions = {}
         # transpositions.get_positions(self.root.game_node, self.positions)
         self.mode = ReplayMode(self)
-        self.surface = None
-        self.font = None
         self.visible_nodes = []
         self.selected_node = self.root
         self.treeview_pos = (BOARD_SIZE + BORDER_SIZE, 0)
+        self.update_treeview()
     
     def mainloop(self):
-        pygame.init()
-        self.surface = pygame.display.set_mode(
-            (BOARD_SIZE+700, BOARD_SIZE+500),
-            flags=pygame.RESIZABLE
-            # flags=pygame.FULLSCREEN
-        )
-        pygame.display.set_caption("PGN Editor")
-        self.font = pygame.font.SysFont('sourcecodepro', 16)
         clock = pygame.time.Clock()
-        self.update_treeview()
         running = True
         while running:
             for event in pygame.event.get():
@@ -288,7 +285,6 @@ class Window:
             self.draw()
             pygame.display.flip()
             clock.tick(60)
-        pygame.quit()
     
     def update_treeview(self):
         self.visible_nodes.clear()
@@ -451,7 +447,9 @@ class Window:
 
 
 def main():
+    pygame.init()
     Window().mainloop()
+    pygame.quit()
 
 
 if __name__ == '__main__':
