@@ -21,8 +21,6 @@ from treeview import TreeNode
 BORDER_SIZE = 15
 SQUARE_SIZE = 45
 BOARD_SIZE = SQUARE_SIZE*8 + BORDER_SIZE*2
-CHAR_WIDTH = 10
-CHAR_HEIGHT = 21
 PLAYER_NAME = "Aemyl"
 
 
@@ -101,12 +99,36 @@ class EventHandler:
         self.parent: Window = parent
         self.show_list = False
         self.show_board = False
+        self.line_count = 0
+        self.line_offset = 0
+    
+    @property
+    def max_visible_lines(self):
+        return self.parent.surface.get_height() // self.parent.char_height
     
     def key_down(self, event):
         pass
     
     def mouse_button_down(self, event):
         pass
+    
+    def mouse_wheel(self, event):
+        if pygame.key.get_mods() & pygame.KMOD_CTRL:
+            self.parent.set_font_size(max(1, self.parent.font_size + event.y))
+            self.parent.update_treeview()
+        else:
+            self.scroll(event)
+    
+    def scroll(self, event):
+        self.line_offset -= event.y * 3
+        self.clip_offset()
+    
+    def clip_offset(self):
+        self.line_offset = min(
+            self.line_offset,
+            self.line_count - self.max_visible_lines
+        )
+        self.line_offset = max(0, self.line_offset)
 
 
 class Selection(Enum):
@@ -168,27 +190,35 @@ class BoardEventHandler(EventHandler):
         self.show_move_list = False
     
     def mouse_button_down(self, event):
+        if event.button != 1:
+            return  # for now, only left clicks are handled
         x, y = event.pos
-        file_index, rank_index = self.parent.pixel_to_square(x, y)
-        if file_index in range(8) and rank_index in range(8):
-            square = chess.square(file_index, rank_index)
-            if self.active_square is None:
-                self.active_square = square
-                return
-            if self.active_square == square:
-                self.active_square = None
-                return
-            move = chess.Move(self.active_square, square)
-            self.active_square = None
-            self.process_move(move)
-        elif self.show_tree:
+        if x in range(BOARD_SIZE) and y in range(BOARD_SIZE):
+            self.board_click(x, y)
+        if self.show_tree:
             for node in self.parent.visible_nodes:
                 node_x, node_y = node.position
-                if x in range(node_x, node_x + node.width) and y in range(node_y, node_y + node.height):
+                node_y -= self.line_offset * self.parent.char_height
+                if (x - node_x) in range(node.width) and (y - node_y) in range(node.height):
                     self.parent.selected_node = node
+                    self.active_square = None
                     break
             self.parent.update_treeview()
+    
+    def board_click(self, x, y):
+        file_index, rank_index = self.parent.pixel_to_square(x, y)
+        if not (file_index in range(8) and rank_index in range(8)):
+            return  # the click was on the border
+        square = chess.square(file_index, rank_index)
+        if self.active_square is None:
+            self.active_square = square
+            return
+        if self.active_square == square:
+            self.active_square = None
+            return
+        move = chess.Move(self.active_square, square)
         self.active_square = None
+        self.process_move(move)
     
     def process_move(self, move):
         pass
@@ -299,7 +329,9 @@ class Window:
             # flags=pygame.FULLSCREEN
         )
         pygame.display.set_caption("PGN Editor")
-        self.font = pygame.font.SysFont('sourcecodepro', 16)
+        self.font_size = 16
+        self.font = pygame.font.SysFont('sourcecodepro', self.font_size)
+        self.char_width, self.char_height = self.font.size(" ")
         self.orientation = chess.WHITE
         with open('pgn/jaenisch_gambit.pgn') as f:
             root = chess.pgn.read_game(f)
@@ -325,6 +357,8 @@ class Window:
                     self.mode.key_down(event)
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     self.mode.mouse_button_down(event)
+                if event.type == pygame.MOUSEWHEEL:
+                    self.mode.mouse_wheel(event)
             self.draw()
             pygame.display.flip()
             clock.tick(60)
@@ -336,11 +370,12 @@ class Window:
         self.visible_nodes.clear()
         self.selected_node.make_visible()
         lines = get_lines(self.root, 0)
+        self.mode.line_count = len(lines)
         offset_x, offset_y = self.treeview_pos
         for line_index, line in enumerate(lines):
             indentation, tree_nodes = line
-            y = offset_y + line_index * CHAR_HEIGHT
-            x = offset_x + indentation * 2 * CHAR_WIDTH
+            y = offset_y + line_index * self.char_height
+            x = offset_x + indentation * 2 * self.char_width
             for tree_node in tree_nodes:
                 tree_node.position = (x, y)
                 tree_node.text = tree_node.base_text
@@ -348,10 +383,10 @@ class Window:
                     tree_node.text += f" ({len(tree_node.children)}"
                     tree_node.text += f"/{tree_node.get_subtree_lines()}/"
                     tree_node.text += f"{tree_node.get_subtree_size()})"
-                tree_node.width = len(tree_node.text) * CHAR_WIDTH
-                tree_node.height = CHAR_HEIGHT
+                tree_node.width = len(tree_node.text) * self.char_width
+                tree_node.height = self.char_height
                 self.visible_nodes.append(tree_node)
-                x += tree_node.width + CHAR_WIDTH
+                x += tree_node.width + self.char_width
     
     def draw(self):
         self.surface.fill("#000000")  # clear
@@ -366,7 +401,9 @@ class Window:
             self.draw_info()
     
     def draw_list(self):
-        pass  # TODO: iterate over self.mode.items and print each in a new line, highlighting the selected item
+        # TODO: iterate over self.mode.items and print each in a new line,
+        #       highlighting the selected item
+        pass
     
     def draw_board(self):
         board = self.selected_node.game_node.board()
@@ -394,7 +431,8 @@ class Window:
             self.surface.blit(piece_surface, pos)
     
     def draw_move_list(self):
-        pgn = str(chess.pgn.Game.from_board(self.selected_node.game_node.board()))
+        pgn = str(chess.pgn.Game.from_board(
+            self.selected_node.game_node.board()))
         moves = pgn.rpartition('\n')[-1]
         parts = moves.split(' ')
         lines = []
@@ -415,12 +453,15 @@ class Window:
                 "#ffffff",
                 "#000000"
             )
-            self.surface.blit(text_surface, (BOARD_SIZE + BORDER_SIZE, total_height))
+            self.surface.blit(
+                text_surface,
+                (BOARD_SIZE + BORDER_SIZE, total_height)
+            )
             total_height += text_surface.get_height()
     
     def draw_info(self):
         text = self.mode.get_info().encode('latin-1')
-        max_line_length = BOARD_SIZE // CHAR_WIDTH
+        max_line_length = BOARD_SIZE // self.char_width
         for i, line in enumerate(itertools.batched(text, max_line_length)):
             comment_surface = self.font.render(
                 bytes(line),
@@ -428,7 +469,10 @@ class Window:
                 "#ffffff",
                 "#000000"
             )
-            self.surface.blit(comment_surface, (0, BOARD_SIZE + BORDER_SIZE + CHAR_HEIGHT * i))
+            self.surface.blit(
+                comment_surface,
+                (0, BOARD_SIZE + BORDER_SIZE + self.char_height * i)
+            )
     
     def draw_tree_view(self):
         for node in self.visible_nodes:
@@ -445,7 +489,11 @@ class Window:
                 get_text_color_from_nags(node.game_node.nags),
                 background
             )
-            self.surface.blit(text_surface, node.position)
+            position = (
+                node.position[0],
+                node.position[1] - self.mode.line_offset * self.char_height
+            )
+            self.surface.blit(text_surface, position)
     
     def get_arrows(self) -> list:
         if not self.mode.show_arrows:
@@ -494,6 +542,11 @@ class Window:
     def exit_practice_mode(self):
         self.mode = ReplayMode(self)
         self.update_treeview()
+    
+    def set_font_size(self, font_size):
+        self.font_size = font_size
+        self.font = pygame.font.SysFont("sourcecodepro", self.font_size)
+        self.char_width, self.char_height = self.font.size(" ")
 
 
 def main():
