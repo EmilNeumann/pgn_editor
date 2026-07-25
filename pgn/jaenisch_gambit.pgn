@@ -154,7 +154,24 @@
    (10. Qg3 fxe4 11. O-O
      (11. dxe4 Qxe4+ 12. Be3 Nf5 13. Qg5+ Be7 14. Qf4 Qxg2 15. Rf1 Rh4
       16. Qe5 Nxe3)
-     (11. Nc3 {TODO: decide between exd3 and Nf5}))
+     (11. Nc3 {TODO: decide between exd3 and Nf5})
+    11... Nf5 12. Bg5+
+     (12. Qg5+ Be7 13. Qf4
+       (13. Qg6 Qe5)
+       (13. Qd2 e3 14. fxe3 Qh4)
+      13... Rh4 14. Qd2 Qh8 15. dxe4+ Ke8 16. exf5 Rxh2)
+     (12. Qf4 Bd6 13. Qg5+
+       (13. Qxe4 Bxh2+ 14. Kh1 Bf4+
+         (14... Ng3+ 15. fxg3 Bxg3+ 16. Bh6
+           (16. Qh7 Rxh7+ 17. Bh6 Rxh6#)
+           (16. Qh4+ Rxh4#)
+          16... Rxh6+ 17. Qh4+ Rxh4#)
+        15. Kg1 Rh1+ 16. Kxh1 Qh8+ 17. Kg1 Qh2#)
+      13... Ne7)
+     (12. Qg6 Bd6 13. Bg5+ Ne7 {transposes into 4. O-O fxe4 5. Bxc6 dxc6 6. Nxe5 Qd4 7. Qh5+ g6 8. Nxg6 hxg6 9. Qxg6+ Kd8 10. d3 Bd6 11. Bg5+ Ne7})
+    12... Ke8 13. Qxc7
+     (13. Qf4 Bd6 14. Qxe4+ Qxe4 15. dxe4 Bxh2+ 16. Kh1 Bf4+ 17. Kg1 Nd4 {threatens Ne2#})
+    13... Bd6 14. Qd8+ Kf7)
    (10. Qf7 fxe4 11. O-O
      (11. Nc3 exd3 12. Be3 Qg4 13. Rd1
        (13. f3)
