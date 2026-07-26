@@ -146,37 +146,70 @@ class FileSelectorMode(EventHandler):
         super().__init__(parent)
         self.show_list = True
         self.selection = Selection.FILES
-        self.selected_index = None
+        self.selected_index = 0
+        self.file_path = None
         self.directory = os.path.abspath('pgn')
-        self.items = []
+        self.str_items = []
+        self.games = []
     
     def key_down(self, event):
         if event.key == pygame.K_UP:
             self.selected_index = max(0, (self.selected_index or 0) - 1)
         if event.key == pygame.K_DOWN:
             self.selected_index = min(
-                len(self.items) - 1,
+                len(self.str_items) - 1,
                 (self.selected_index or 0) + 1
             )
         if event.key == pygame.K_RETURN:
             if self.selected_index is None:
                 return
             if self.selection == Selection.FILES:
-                pass  # TODO: determine selected file, update_list()
+                self.file_path = os.path.join(
+                    self.directory,
+                    self.str_items[self.selected_index]
+                )
+                self.selection = Selection.GAMES
+                self.update_list()
             elif self.selection == Selection.GAMES:
-                pass  # TODO: open selected game and switch to ReplayMode
+                self.parent.set_game(self.games[self.selected_index])
     
     def mouse_button_down(self, event):
-        pass  # TODO: convert y position to list index
+        if event.button != 1:
+            return
+        x, y = event.pos
+        self.selected_index = min(
+            len(self.str_items)-1,
+            y // self.parent.char_height + self.line_offset
+        )
     
     def update_list(self):
-        self.items.clear()
+        self.line_offset = self.selected_index = 0
+        self.str_items.clear()
         if self.selection == Selection.FILES:
             for filename in os.listdir(self.directory):
                 if filename.endswith('.pgn'):
-                    self.items.append(filename)
+                    self.str_items.append(filename)
         if self.selection == Selection.GAMES:
-            pass  # TODO: get games from selected file and include a summary in the list
+            if self.file_path is None:
+                print("selection type is GAMES but file_path is None")
+                return
+            self.games.clear()
+            with open(self.file_path) as f:
+                while (game := chess.pgn.read_game(f)) is not None:
+                    self.games.append(game)
+                    self.str_items.append(self.game_to_str(game))
+        self.line_count = len(self.str_items)
+    
+    @staticmethod
+    def game_to_str(game) -> str:
+        event = game.headers["Event"]
+        site = game.headers["Site"]
+        date = game.headers["Date"]
+        _round = game.headers["Round"]
+        white = game.headers["White"]
+        black = game.headers["Black"]
+        result = game.headers["Result"]
+        return ' '.join([event, site, date, _round, white, black, result])
 
 
 class BoardEventHandler(EventHandler):
@@ -328,25 +361,18 @@ class Window:
         self.surface = pygame.display.set_mode(
             (BOARD_SIZE+700, BOARD_SIZE+500),
             flags=pygame.RESIZABLE
-            # flags=pygame.FULLSCREEN
         )
         pygame.display.set_caption("PGN Editor")
         self.font_size = 16
         self.font = pygame.font.SysFont(FONT, self.font_size)
         self.char_width, self.char_height = self.font.size(" ")
         self.orientation = chess.WHITE
-        with open('pgn/jaenisch_gambit.pgn') as f:
-            root = chess.pgn.read_game(f)
-            if root.headers["Black"] == PLAYER_NAME:
-                self.orientation = chess.BLACK
-        self.root = TreeNode(root, None)
-        # self.positions = {}
-        # transpositions.get_positions(self.root.game_node, self.positions)
-        self.mode = ReplayMode(self)
+        self.root = None
+        self.mode = FileSelectorMode(self)
+        self.mode.update_list()
         self.visible_nodes = []
         self.selected_node = self.root
         self.treeview_pos = (BOARD_SIZE + BORDER_SIZE, 0)
-        self.update_treeview()
     
     def mainloop(self):
         clock = pygame.time.Clock()
@@ -403,9 +429,18 @@ class Window:
             self.draw_info()
     
     def draw_list(self):
-        # TODO: iterate over self.mode.items and print each in a new line,
-        #       highlighting the selected item
-        pass
+        for i, item in enumerate(self.mode.str_items):
+            background = "#000000"
+            if i == self.mode.selected_index:
+                background = "#0000ff"
+            text_surface = self.font.render(
+                item.encode('latin-1'),
+                False, "#ffffff", background
+            )
+            self.surface.blit(
+                text_surface,
+                (0, (i - self.mode.line_offset) * self.char_height)
+            )
     
     def draw_board(self):
         board = self.selected_node.game_node.board()
@@ -549,6 +584,14 @@ class Window:
         self.font_size = font_size
         self.font = pygame.font.SysFont(FONT, self.font_size)
         self.char_width, self.char_height = self.font.size(" ")
+    
+    def set_game(self, game):
+        self.root = TreeNode(game, None)
+        self.selected_node = self.root
+        self.mode = ReplayMode(self)
+        self.update_treeview()
+        if game.headers["Black"] == PLAYER_NAME:
+            self.orientation = chess.BLACK
 
 
 def main():
