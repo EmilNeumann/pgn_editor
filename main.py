@@ -7,6 +7,7 @@ import io
 import itertools
 import os.path
 import random
+import textwrap
 
 import chess
 import chess.pgn
@@ -460,11 +461,11 @@ class Window:
             total_height += text_surface.get_height()
     
     def draw_info(self):
-        text = self.mode.get_info().encode('latin-1')
+        text = self.mode.get_info()
         max_line_length = BOARD_SIZE // self.char_width
-        for i, line in enumerate(itertools.batched(text, max_line_length)):
+        for i, line in enumerate(textwrap.wrap(text, max_line_length)):
             comment_surface = self.font.render(
-                bytes(line),
+                line.encode('latin-1'),
                 False,
                 "#ffffff",
                 "#000000"
