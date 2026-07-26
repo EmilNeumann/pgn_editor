@@ -22,6 +22,7 @@ from treeview import TreeNode
 BORDER_SIZE = 15
 SQUARE_SIZE = 45
 BOARD_SIZE = SQUARE_SIZE*8 + BORDER_SIZE*2
+FONT = 'sourcecodepro'
 PLAYER_NAME = "Aemyl"
 
 
@@ -331,7 +332,7 @@ class Window:
         )
         pygame.display.set_caption("PGN Editor")
         self.font_size = 16
-        self.font = pygame.font.SysFont('sourcecodepro', self.font_size)
+        self.font = pygame.font.SysFont(FONT, self.font_size)
         self.char_width, self.char_height = self.font.size(" ")
         self.orientation = chess.WHITE
         with open('pgn/jaenisch_gambit.pgn') as f:
@@ -546,7 +547,7 @@ class Window:
     
     def set_font_size(self, font_size):
         self.font_size = font_size
-        self.font = pygame.font.SysFont("sourcecodepro", self.font_size)
+        self.font = pygame.font.SysFont(FONT, self.font_size)
         self.char_width, self.char_height = self.font.size(" ")
 
 
