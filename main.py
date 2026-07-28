@@ -36,7 +36,7 @@ def get_piece_surface(piece_type, color):
     piece = chess.Piece(piece_type, color)
     piece_svg = chess.svg.piece(piece, size=SQUARE_SIZE)
     buffer = io.BytesIO(piece_svg.encode())
-    return pygame.image.load(buffer)
+    return pygame.image.load(buffer).convert_alpha()
 
 
 def get_arrow_color_from_nags(nags: set[int]) -> str:
@@ -363,6 +363,7 @@ class Window:
             flags=pygame.RESIZABLE
         )
         pygame.display.set_caption("PGN Editor")
+        pygame.display.set_icon(get_piece_surface(chess.KNIGHT, chess.WHITE))
         self.font_size = 16
         self.font = pygame.font.SysFont(FONT, self.font_size)
         self.char_width, self.char_height = self.font.size(" ")
