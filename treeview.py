@@ -82,3 +82,8 @@ class TreeNode:
             child.get_subtree_lines()
             for child in self.children
         )
+    
+    def is_descendant(self, ancestor):
+        if self.parent is None:
+            return False
+        return ancestor == self.parent or self.parent.is_descendant(ancestor)

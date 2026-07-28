@@ -518,6 +518,8 @@ class Window:
             if node is self.selected_node:
                 background = "#0000ff"
             elif node.fen == self.selected_node.fen:
+                background = "#7f007f"
+            elif self.selected_node.is_descendant(node):
                 background = "#00007f"
             elif node.game_node.comment:
                 background = "#3f3f3f"
