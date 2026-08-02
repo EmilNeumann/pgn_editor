@@ -186,7 +186,7 @@ class FileSelectorMode(EventHandler):
         self.line_offset = self.selected_index = 0
         self.str_items.clear()
         if self.selection == Selection.FILES:
-            for filename in os.listdir(self.directory):
+            for filename in sorted(os.listdir(self.directory)):
                 if filename.endswith('.pgn'):
                     self.str_items.append(filename)
         if self.selection == Selection.GAMES:
