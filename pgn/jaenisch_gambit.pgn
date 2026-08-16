@@ -1331,7 +1331,9 @@
   8... Qe7
    (8... Bd7 9. Nc3 Qe7 {transposes into 8... Qe7 9. Nc3 Bd7})
   9. Nc3
-   (9. b4 {TODO})
+   (9. b4 Be6 $1 10. Bxc6+ %1 10... bxc6 11. Qa6 $1 11... Bb6
+    12. a4 $1 12... O-O 13. a5 $1 13... Bd4 14. c3 Ng4 $1 15. cxd4 Rxf3
+    16. Nd2 $1 16... Rc3 $1 17. h3 Nf6 $1 18. dxe5 dxe5)
   9... Bd7 10. Nd5
    (10. Bg5 {TODO})
   10... Nxd5 11. exd5 Nd4 12. Bxd7+
