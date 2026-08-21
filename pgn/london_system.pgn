@@ -1,0 +1,70 @@
+[Event "Preparation"]
+[Site ""]
+[Date ""]
+[Round ""]
+[White "Player"]
+[Black "Aemyl"]
+[Result "*"]
+
+1. d4 d5 2. Nf3
+ (2. Bf4 {Accelerated London System}
+  2... c5 {Steinitz Counter Gambit}
+  3. e3
+   (3. c3 Qb6 {rare move with high wr}
+    4. Qb3 Qxb3 5. axb3 cxd4 6. cxd4 Nc6 7. e3 e6)
+   (3. Nf3 cxd4 4. Nxd4 f6 5. Nf3
+     (5. Bg3)
+     (5. Nb3)
+     (5. e3 $4 5... e5)
+     (5. Bxb8 Rxb8)
+    5... Nc6)
+   (3. dxc5 e6 4. e3
+     (4. b4 $2 4... Qf6 5. Bxb8 Qxa1)
+    4... Bxc5)
+  3... cxd4 4. exd4 Nc6 5. c3
+   (5. Nf3 Bg4 6. c3 f6 {transposes into 5. c3 f6 6. Nf3 Bg4})
+   (5. Nc3)
+  5... f6 6. Nf3
+   (6. Bd3)
+   (6. Nd2)
+  6... Bg4 7. Be2
+   (7. Nbd2)
+   (7. h3)
+   (7. Bb5)
+   (7. Bd3 $6 {[-1]} 7... e5 8. dxe5 fxe5 9. Bg5 Bxf3 10. Bxd8 $4
+    10... Bxd1 11. Kxd1 Rxd8)
+   (7. Qb3)
+  7... e6 8. Nbd2
+   (8. h3)
+   (8. O-O)
+  8... Bd6 9. Bg3
+   (9. Bxd6 Qxd6)
+  9... Nge7 10. O-O
+   (10. Qb3)
+  10... Bxg3 11. hxg3 h5)
+2... Nf6 3. Bf4 {London System}
+3... c5 4. e3 Nc6 5. c3
+ (5. Nbd2)
+ (5. Bb5)
+ (5. Nc3 Bg4 6. Be2
+   (6. Nb5 Rc8)
+  6... e6)
+5... Qb6 6. Qb3 c4 7. Qxb6
+ (7. Qc2 Bf5 8. Qc1 Nh5 9. Bg3
+   (9. Bg5 f6 10. Bh4 g5 11. Bg3 e5 12. dxe5 Nxg3 13. hxg3 Nxe5
+    14. Nxe5 fxe5 15. Nd2 O-O-O 16. Nf3 $2
+     (16. Be2 Be7)
+     (16. e4 $6 16... Bxe4 17. Nxe4
+       (17. Bxc4 Bxg2 18. Rh2
+         (18. Rg1 $2 18... Bh3 19. Bf1)
+        18... dxc4 19. Rxg2 Rd3)
+      17... dxe4 18. Bxc4)
+    16... g4
+     (16... Qf6)
+    17. Nxe5 Qf6 {traps the knight}
+     (17... Re8 18. Nf7 d4 19. Bxc4 dxe3 $1 20. Nxh8 exf2+ 21. Kf1 Qc6
+       (21... Re1+ 22. Qxe1 fxe1=Q+ 23. Rxe1)
+      22. Qf4 Be4 $1)
+    18. Nxg4 Bxg4)
+  9... Nxg3 hxg3 {TODO})
+7... axb6 *
