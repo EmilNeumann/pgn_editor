@@ -31,7 +31,9 @@
     6... Nc6)
   3... e4 {Staunton Line}
    (3... exf4 {Modern Transfer}
-    4. Nf3 {transposes into 2... exf4 3. Nf3 d5 4. exd5})
+    4. Nc3
+     (4. Nf3 {transposes into 2... exf4 3. Nf3 d5 4. exd5})
+    4... Qh4+ 5. Ke2 Bg4+ 6. Nf3 Bd6)
    (3... c6 {Nimzowitsch-Marshall Countergambit})
   4. d3)
  (2... Bc5 {Classical Variation})
@@ -44,13 +46,14 @@
 3. Nf3 {King's Knight Gambit}
  (3. Bc4 {Bishop's Gambit}
   3... Nc6 {Maurian Defense}
-  4. Nf3 {TODO: transposition link ?}
-   (4. d4 Qh4+ 5. Kf1 d6 6. Nf3 Bg4 {TODO: prepare for more common responses than Nxh4}
-    7. Nxh4 Bxd1 8. c3 {TODO})
-  4... g5 {Blachly Gambit}
-  5. O-O
-   (5. d4 Bg7)
-  5... Bg7 6. d4 d6 7. c3 h6 8. Qb3 Qd7 9. Bb5 a6)
+  4. d4
+   (4. Nf3 {transposes into 3. Nf3 Nc6 4. Bc4})
+  4...Qh4+ 5. Kf1 d6 6. Nf3 Bg4 {TODO: prepare for more common responses than Nxh4}
+  7. c3
+   (7. Bxf4)
+   (7. Nc3)
+   (7. Nxh4 Bxd1 8. c3 {TODO})
+  7... Qf6)
  (3. d4 {Villemson Gambit}
   3... Qh4+ 4. Ke2
    (4. g3 fxg3)
@@ -67,26 +70,84 @@
    (4. g3)
   4... d5 5. Nxd5
    (5. Nf3)
-   (5. exd5 {TODO: transposition link})
+   (5. exd5 {transposes into 2... d5 3. exd5 exf4 4. Nc3 Qh4+ 5. Ke2})
   5... Bg4+ 6. Nf3 Nc6 7. Nxc7+
-   (7. d4 O-O-O 8. Bxf4 Nf6)
+   (7. d4 O-O-O 8. Bxf4 Nf6 9. Bg3
+     (9. Nxf6 Nxd4+))
    (7. c3)
   7... Kd8 8. Nxa8 Ne5 9. Qe1
    (9. d4 Nxf3 10. gxf3 Bxf3+ 11. Kxf3 Qh5+)
    (9. h3 Bh5)
   9... Nxf3 10. Qxh4+
    (10. gxf3 Bxf3+ 11. Kxf3 Qxe1)
-  10... Nxh4+ 11. Ke1 g5 12. d4 Nf6 13. e5 Ne4 14. Bd3 f5 15. exf6 Nxf6)
+  10... Nxh4+ 11. Ke1 g5 12. d4
+   (12. a4)
+   (12. d3 Kc8 13. Bd2 Kb8 14. Bc3 f6 15. e5 Nh6 16. exf6 Bd6 17. f7 Rc8)
+  12... Nf6 13. e5 Ne4 14. Bd3 f5 15. exf6 Nxf6)
 3... g5 {Main Line}
- (3... Nc6 {MacLeod Defense})
+ (3... Nc6 {MacLeod Defense}
+  4. d4
+   (4. Bc4 g5 {Blachly Gambit}
+    5. O-O
+     (5. d4 Bg7 6. c3
+       (6. O-O {transposes into 5. O-O Bg7 6. d4}))
+    5... Bg7 6. d4 d6 7. c3 h6 8. Qb3 Qd7 9. Bb5 a6)
+  4... g5)
  (3... d6 {Fischer Defense})
  (3... Nf6 {Schallopp Defense}
   4. Nc3
-   (4. e5 Nh5)
-   (4. Bc4 Nxe4 {TODO: watch Naroditzkys video})
-   (4. d3 d5 {TODO: watch video})
+   (4. e5 Nh5 {TODO: watch video})
+   (4. Bc4 Nxe4 5. O-O
+     (5. d3 Nf6 6. Bxf4 d5 7. Bb3 c6)
+     (5. Bxf7+ Kxf7 6. Ne5+ Kg8 7. O-O
+       (7. Qh5 Qe7)
+       (7. c3 Qh4+ 8. g3 Qe7 9. Qb3+ Qe6)
+       (7. d3 Qh4+ 8. g3 Nxg3)
+       (7. Qf3 Ng5 8. Qxf4 d6)
+      7... Nc6)
+     (5. Qe2 d5
+       (5... Qe7 {Naroditzkys recommendation}
+        6. d3 Nf6 7. Bxf4 Qxe2+ 8. Kxe2 d5 9. Bb3 c6))
+    5... d5 6. Bb3 Be6 7. d3 Bc5+ 8. d4 Bd6)
+   (4. d3 d5 5. e5
+     (5. Bxf4 Nc6 6. e5 Nh5 7. Bg5
+       (7. Bd2)
+       (7. Be3 d4)
+       (7. Qd2)
+      7... Be7)
+     (5. exd5)
+     (5. Nc3)
+    5... Nh5)
    (4. d4)
-  4... d5 {TODO: watch video})
+  4... d5 5. e5
+   (5. exd5 Nxd5 6. Nxd5
+     (6. Bc4 Qe7+ 7. Qe2
+       (7. Kf2 Qc5+)
+       (7. Ne2)
+       (7. Be2)
+       (7. Kf1 Nb6 8. Bb3 Nc6 9. d4 Bg4 10. Bxf4 O-O-O 11. d5 Na5)
+      7... Nxc3 8. dxc3
+       (8. Qxe7+)
+       (8. bxc3)
+      8... Qxe2+ 9. Kxe2
+       (9. Bxe2)
+      9... Bd6)
+    6... Qxd5 7. d4 Be7 8. Bxf4
+     (8. c4 Qd6 9. c5
+       (9. Bd3 Nc6 10. d5 Ne5)
+       (9. Be2)
+      9... Qf6 10. Bc4
+       (10. Qd2 Nc6 11. Qxf4 Be6 12. Bb5
+         (12. Qxc7 Nxd4)
+        12... Bd5 13. O-O
+         (13. Qxc7 Bxf3 14. gxf3 Qxf3)
+        13... O-O-O)
+      10... Nc6)
+     (8. Bd3 g5 9. O-O Bg4 10. c3 Nc6 11. Qc2 O-O-O 12. Be4 Qd7
+      13. d5 f5 14. dxc6 bxc6 15. Ne5 Qe6 16. Nxg4 fxe4 17. Nf2 e3)
+     (8. Be2 g5)
+    8... Qe4+)
+  5... Nh5 6. d4 {TODO: watch video})
  (3... d5 {Modern Defense}
   4. exd5
    (4. e5 g5 {TODO})
