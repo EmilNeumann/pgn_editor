@@ -1,6 +1,8 @@
 # coding: utf-8
 
 
+import argparse
+
 import chess.pgn
 
 
@@ -70,7 +72,10 @@ def show_malformed_transpositions(positions: dict[str, list]):
 
 
 def main():
-    with open('pgn/jaenisch_gambit.pgn') as f:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("path")
+    args = parser.parse_args()
+    with open(args.path) as f:
         game = chess.pgn.read_game(f)
     positions = {}
     get_positions(game, positions)
