@@ -10,8 +10,27 @@
 3... Nf6 {Four Knights Game}
 4. Bc4 {Italian Variation}
  (4. d4 {Scotch Variation}
-  4... exd4 5. Nxd4 Bb4 6. Nxc6 bxc6 7. Bd3 {TODO: decide between O-O and d5}
-   (7. Bd2 Qe7))
+  4... exd4 5. Nxd4
+   (5. Nd5 {Belgrade Gambit})
+  5... Bb4 6. Nxc6 bxc6 7. Bd3
+   (7. Bd2 Qe7)
+  7... d5
+   (7... O-O 8. O-O
+     (8. Bd2)
+    8... d5 9. exd5 {transposes into 7... d5 8. exd5 O-O 9. O-O}
+     (9. e5))
+  8. exd5
+   (8. e5)
+  8... cxd5
+   (8... O-O 9. O-O
+     (9. dxc6)
+    9... cxd5 {transposes into 8... cxd5 9. O-O O-O})
+  9. O-O
+   (9. Bd2)
+  9... O-O 10.Bg5
+   (10. h3)
+  10... c6 11. Qf3
+   (11. Ne2))
  (4. Bb5 {Spanish Variation}
   4... Bb4 {Double Spanish}
   5. Bxc6
