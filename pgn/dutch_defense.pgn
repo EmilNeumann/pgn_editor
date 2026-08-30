@@ -11,5 +11,41 @@
  (2. Nf3)
  (2. e3)
  (2. Nc3)
+ (2. e4 {Staunton Gambit}
+  2... fxe4 {Accepted}
+  3. Nc3
+   (3. f3 {TODO: decide between d5 and e6})
+   (3. Qh5+ g6 4. Qe5
+     (4. Be2)
+    4... Nf6 5. Bg5
+     (5. Nc3 Nc6)
+    5... Nc6 6. Qf4
+     (6. Qc5 e5)
+     (6. Qg3 Nxd4)
+    6... Nxd4)
+  3... Nf6 4. Bg5
+   (4. f3 {Blackmar's Second Gambit}
+    4... d5)
+  4... g6 5. Bxf6
+   (5. f3 {Lasker Variation}
+    5... d5)
+   (5. h4 {Alekhine Variation}
+    5... d5)
+   (5. Bc4 Bg7)
+  5... exf6 6. Nxe4 d5 7. Ng3
+   (7. Nc3 Bh6)
+  7... Qe7+ 8. Be2
+   (8. Qe2 {TODO})
+  8... Qb4+ 9. c3
+   (9. Kf1 Nc6 10. Nf3 Qxb2)
+   (9. Qd2 Qxb2 10. Rd1
+     (10. Rc1 Ba3)
+    10... Bb4)
+  9... Qxb2 10. Rc1 {TODO}
+   (10. Qc1 Qxc1+ 11. Rxc1)
+   (10. Nf3 Qxc3+ 11. Nd2
+     (11. Kf1 Nc6 12. Rc1 Qa3)
+    11... Bh6 12. Rc1 Qxd4))
+ (2. Bg5)
  (2. g3)
 2... Nf6 *
