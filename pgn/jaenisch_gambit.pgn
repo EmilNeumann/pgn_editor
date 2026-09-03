@@ -1307,7 +1307,9 @@
   11... Bb6)
  (7. Bg5 d6 8. h3 $6
    (8. Nc3 {transposes into 7. Nc3 d6 8. Bg5})
-   (8. Bc4 h6 9. Bh4
+   (8. Bc4 $6 8... h6
+     (8... Bg4 $6 9. h3 Bh5 10. Nc3 {transposes into 7. Nc3 d6 8. Bc4 Bg4 9. h3 Bh5 10. Bg5})
+    9. Bh4
      (9. Bxf6 Qxf6)
     9... g5 10. Bg3
      (10. Nxg5 hxg5 11. Bxg5)
@@ -1315,7 +1317,7 @@
   8... O-O
    (8... h6 {TODO})
    (8... a6 {TODO})
-   (8... Be6 {TODO})
+   (8... Be6 9. Nc3 O-O {transposes into 7. Nc3 d6 8. Bg5 O-O 9. h3 Be6})
   9. Nc3 {transposes into 7. Nc3 d6 8. Bg5 O-O 9. h3})
  (7. Qd3 d6
    (7... Nd4 8. Nxd4
@@ -1422,7 +1424,7 @@
  (10. c3)
  (10. Bxf6)
  (10. Nh4)
- (10. h3 {transposes into 9. h3 Kh8 10. Nd5})
+ (10. h3 $6 {transposes into 9. h3 Kh8 10. Nd5})
 10... gxf6 11. Bh6
  (11. Bh4 Qe8
    (11... Bg4))
