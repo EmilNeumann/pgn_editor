@@ -74,15 +74,21 @@ def show_malformed_transpositions(positions: dict[str, list]):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("path")
+    parser.add_argument(
+        "-a", "--all",
+        action="store_true",
+        help="show all transpositions, not just the malformed ones"
+    )
     args = parser.parse_args()
     with open(args.path) as f:
         game = chess.pgn.read_game(f)
     positions = {}
     get_positions(game, positions)
-    # show_transpositions(positions)
-    show_malformed_transpositions(positions)
+    if args.all:
+        show_transpositions(positions)
+    else:
+        show_malformed_transpositions(positions)
 
 
 if __name__ == '__main__':
     main()
-    input("press Enter to exit. ")
