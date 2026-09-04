@@ -1355,15 +1355,15 @@
    (8. Nc3 {transposes into 7. Nc3 d6 8. Bc4})
    (8. h3)
    (8. a3)
-   (8. Bg5 {transposes into 7. Bg5 d6 8. Bc4})
+   (8. Bg5 $6 {transposes into 7. Bg5 d6 8. Bc4})
   8... Qe7 9. Bf7+
    (9. Nc3 Bg4)
-   (9. Nf7 $4 9... Rf8 10. Ng5 h6 11. Nf3 Nxe4 12. Nc3
+   (9. Nf7 $4 9... Rf8 10. Ng5 h6 11. Nf3 Nxe4 12. Nc3 $2
      (12. Be3 Bg4 13. Bd5
        (13. Be2 O-O-O)
        (13. Bd3 d5)
-       (13. Nc3 Nxc3 14. bxc3 Bxe3 15. fxe3 e4 16. h3 exf3 17. hxg4 Qxe3+)
-       (13. Nbd2 Nxd2 14. Qxd2
+       (13. Nc3 $2 13... Nxc3 14. bxc3 Bxe3 15. fxe3 e4 16. h3 exf3 17. hxg4 Qxe3+)
+       (13. Nbd2 $6 13... Nxd2 14. Qxd2
          (14. Bxd2 e4 15. Re1 Ne5 16. Rxe4 Nxf3+ 17. gxf3 Qxe4
           18. fxe4 Bxd1 19. Rxd1 Rxf2 20. Kh1 Bd4)
         14... Bxf3 15. gxf3 O-O-O)
