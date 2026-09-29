@@ -1,0 +1,39 @@
+[Event "Preparation"]
+[Site "*"]
+[Date "*"]
+[Round "*"]
+[White "Aemyl"]
+[Black "Player"]
+[Result "*"]
+
+1. e4 e5 2. Nf3 Nc6 3. d4 {Scotch Game}
+3... exd4 4. Bc4 {Scotch Gambit}
+4... Nf6 {Dubois-Reti Defense}
+ (4... Bc5 {Haxo Gambit})
+ (4... h6)
+ (4... d6)
+ (4... Bb4+ {London Defense})
+ (4... Be7 {Benima Defense})
+5. O-O Bc5 {Max Lange Attack}
+ (5... Nxe4 {Double Gambit Accepted}
+  6. Re1
+   (6. Nc3 {Anderssen Attack})
+  6... d5 7. Bxd5 Qxd5 8. Nc3 {})
+ (5... d6 {Janowski Defense})
+ (5... Be7 {de Riviere Defense})
+ (5... d5)
+ (5... h6)
+ (5... Bd6)
+ (5... Bb4 $2 6. e5 Ng4
+   (6... d5 7. Bb5 Ne4
+     (7... Nd7)
+    8. Nxd4 Bd7
+     (8... O-O)
+    9. Bxc6 bxc6
+     (9... Bxc6)
+    10. f3 Ng5 {TODO}
+     (10... Nc5))
+   (6... Ne4)
+   (6... Ng8)
+  7. c3)
+6. e5 *
