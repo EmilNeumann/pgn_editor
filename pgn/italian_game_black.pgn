@@ -21,7 +21,66 @@
      (5. Bxg8)
     5... Nf6 6. Bg5
      (6. Nc3)
-     (6. exf5)
+     (6. exf5 d5 7. Bb5
+       (7. Bb3 Bxf5 {the move order 4. exf5 Nf6 5. d3 d5 6. Bb3 Bxf5 7. O-O Bc5 is more common}
+        8. Re1
+         (8. Bg5 Qd6 9. Nc3
+           (9. Re1 O-O-O 10. Nc3 Bg4)
+           (9. Bxf6 gxf6)
+           (9. Nbd2 O-O-O)
+          9... O-O-O 10. Bxf6
+           (10. Nb5 {TODO: decide between Qe6 and Qe7})
+           (10. Re1 {transposes into 9. Re1 O-O-O 10. Nc3})
+          10... gxf6 11. Nxd5 Bg4 12. h3 Bxf3 13. Qxf3 Nd4 {with the idea of Nxb3 followed by Qxd5})
+         (8. Nc3 Bg4 9. h3
+           (9. Bg5 Qd7 10. Bxf6 gxf6 11. Nxd5 Qg7)
+          9... Bxf3 10. Qxf3 Nd4)
+         (8. h3 O-O
+           (8... Qd7 $5 {TODO (might be a powerful trap)})
+          9. Bg5
+           (9. Re1 Kh8 10. Nxe5 Nxe5 11. Rxe5 Bxf2+ 12. Kxf2 Ng4+ 13. hxg4
+             (13. Kg1 Nxe5)
+            13... Bxg4+)
+           (9. Nc3 {TODO: transposition link?})
+          9... h6 10. Bh4
+           (10. Bxf6)
+          10... g5 11. Bg3
+           (11. Nxg5 hxg5 12. Bxg5 Qd7)
+          11... g4)
+        8... O-O 9. Nxe5
+         (9. Bg5 Bg4 10. h3
+           (10. Nbd2 Kh8 11. h3
+             (11. Qc1 Qd6 12. h3 e4)
+            11... Bh5)
+          10... Bxf3 11. Qxf3 Nd4 12. Qg3
+           (12. Qd1 Nxb3 13. axb3 Bxf2+ 14. Kxf2 Nh5+ 15. Kg1 Qxg5)
+          12... Nxb3 13. axb3 Nh5)
+        9... Nxe5 10. Rxe5 Ng4 11. Rxd5
+         (11. Rxf5 Qh4)
+         (11. Re2 Qh4 12. h3
+           (12. Bxd5+ Kh8)
+          12... Nxf2)
+         (11. Bxd5+ Kh8 12. Rxf5
+           (12. Be3 Bxe3 13. fxe3 Nxe5)
+          12... Qh4)
+        11... Qh4 12. Rxf5+
+         (12. Rxc5+ Kh8)
+         (12. h3 Qxf2+ 13. Kh1 Be6)
+        12... Kh8 13. Rxf8+ Rxf8)
+      7... Bxf5
+       (7... O-O 8. Bxc6 bxc6 9. Nxe5 Bxf5)
+      8. Nxe5
+       (8. Bxc6+ bxc6 9. Nxe5 O-O {transposes into 7... O-O 8. Bxc6 bxc6 9. Nxe5 Bxf5})
+      8... O-O 9. Nxc6
+       (9. Bxc6 bxc6 {transposes into 7... O-O 8. Bxc6 bxc6 9. Nxe5 Bxf5})
+      9... bxc6 10. Bxc6 Ng4 $1 11. Bxa8
+       (11. d4 Qd6 $1 {TODO})
+       (11. h3 Nxf2 12. Rxf2 Bxf2+ 13. Kxf2
+         (13. Kh1 Qh4)
+        13... Bg4+)
+      11... Nxf2 12. Rxf2 Bxf2+ 13. Kh1
+       (13. Kxf2 Bg4+ {wins the queen})
+      13... Qxa8)
      (6. c3 fxe4 7. dxe4 d6 8. Bg5
        (8. Re1 a5)
        (8. Ng5 Qe7 9. Bf7+ Kf8 10. Bb3 h6 11. Nf3 g6)
