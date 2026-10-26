@@ -23,42 +23,43 @@
      (5. g3 $4 5... fxg3 6. Nf3 g2+ 7. Nxh4 gxh1=Q)
     5... b6 {Fraser-Minckwitz Defense}
     6. Nf3 $4
-     (6. a4 {TODO})
+     (6. a4 $2 {TODO})
      (6. Nb5 {TODO})
      (6. Qd2 {TODO})
-    6... Ba6+ 7. Kd2 Qf2+ {TODO})
-  4... g5 5. d4 {Pierce Gambit}
-   (5. Bc4)
-   (5. h4)
-  5... g4 6. Ne5
+    6... Ba6+ $1 7. Kd2 Qf2+ $1 {TODO})
+  4... g5 5. d4 $2 {Pierce Gambit}
+   (5. Bc4 $2)
+   (5. h4 $6 5... g4 $1)
+   (5. h3 $2)
+  5... g4 $1 6. Ne5
    (6. Bc4 gxf3 7. Qxf3
-     (7. O-O)
-    7... Qh4+ 8. g3 Nxd4 9. Qf2
-     (9. Qd3)
-     (9. gxh4)
-     (9. Qg2)
-    9... Qf6 10. Bxf4
-     (10. Nd5)
-     (10. O-O)
-    10... Bb4 11. O-O
-     (11. O-O-O Bxc3 12. bxc3 Ne6)
+     (7. O-O $2)
+    7... Qh4+ 8. g3 $1 8... Nxd4 9. Qf2 $1
+     (9. Qd3 $4 9... fxg3 $1)
+     (9. gxh4 $4 9... Nxf3+ $1)
+     (9. Qg2 $2)
+    9... Qf6 $1 10. Bxf4
+     (10. Nd5 $2 10... Qe5 $1)
+     (10. O-O $2)
+    10... Bb4 11. O-O $2
+     (11. O-O-O $2 11... Bxc3 $1 12. bxc3 Ne6)
      (11. e5 Qc6)
-    11... Bxc3 12. bxc3 Ne6)
-   (6. d5)
-   (6. Bxf4)
+    11... Bxc3 $1 12. bxc3 Ne6 $1)
+   (6. d5 $2 6... gxf3)
+   (6. Bxf4 $2 6... gxf3)
   6... Qh4+ 7. Ke2
-   (7. g3 fxg3 8. Qxg4 Nxe5 9. Qxh4 Nf3+ 10. Ke2 Nxh4 11. hxg3 Ng6)
-   (7. Kd2 Nxd4 8. Qxg4
+   (7. g3 $4 7... fxg3 $1 8. Qxg4 Nxe5 $3 9. Qxh4 Nf3+ $1 10. Ke2 Nxh4 11. hxg3 Ng6)
+   (7. Kd2 $2 7... Nxd4 8. Qxg4 $6
      (8. Kd3)
-     (8. Nxg4)
+     (8. Nxg4 $6)
      (8. Bc4)
-    8... Qe7 9. Qxf4 Bh6)
-  7... d6 8. Nxc6 g3 9. h3
-   (9. Kd3 bxc6)
-   (9. Nb4 Bg4+)
-   (9. Bxf4 Bg4+)
+    8... Qe7 $1 9. Qxf4 $2 9... Bh6 $1)
+  7... d6 8. Nxc6 g3 $1 9. h3 $2
+   (9. Kd3 $6 9... bxc6)
+   (9. Nb4 $4 9... Bg4+ $1)
+   (9. Bxf4 $4 9... Bg4+ $1)
   9... bxc6 10. Ke1
-   (10. Kd3 Ne7)
+   (10. Kd3 $2 10... Ne7)
    (10. Qd3 Ne7)
   10... Ne7 {prepares Ng6 to defend the f4 pawn})
 3... Nf6 4. d3

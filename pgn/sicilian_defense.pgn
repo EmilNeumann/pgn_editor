@@ -237,6 +237,25 @@
      (6... e6 7. Nc3)
      (6... d6 7. d5)
     7. exd5 Qxd5 8. Nc3 {transposes into 3... cxb4 4. d4 d5 5. exd5 Qxd5 6. c4 bxc3 7. Nxc3})
+   (3... e6 4. bxc5 Bxc5 5. d4 Bb6
+     (5... Be7)
+     (5... Bb4+ 6. c3 Ba5
+       (6... Be7)
+      7. d5 exd5
+       (7... Nce7 8. d6 Nc6
+         (8... Ng6 9. Bd3 Nf6 {TODO: decide between e5 and O-O})
+        9. Bd3 Nf6 10. h3)
+      8. exd5 Nce7
+       (8... Qe7+ 9. Be2 Ne5 10. O-O)
+       (8... Nb8)
+      9. d6)
+    6. c3 {most played move}
+     (6. Nbd2 {super rare top engine move}))
+   (3... b6 4. bxc5 bxc5 5. Bb5 Bb7 {TODO: decide between Nc3 and O-O}
+     (5... Qb6 6. Nc3 a6
+       (6... e6)
+      7. Nd5 Qb7 8. Bxc6 Qxc6 9. Ne5 Qb7 10. Qh5 g6 11. Nxg6 fxg6
+      12. Qe5 Nf6 13. Nxf6+ Kf7 14. Nd5 Bg7 15. Qxe7+ Kg8 16. Qe8+ Bf8 17. d3))
   4. d4 d5
    (4... e6 5. d5 exd5
      (5... Nb8)
