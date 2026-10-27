@@ -1,0 +1,54 @@
+[Event "Preparation"]
+[Site "*"]
+[Date "*"]
+[Round "*"]
+[White "Player"]
+[Black "Aemyl"]
+[Result "*"]
+
+1. d4 Nf6 2. c4
+ (2. Nf3)
+ (2. Bf4 g6 3. e3
+   (3. Nc3)
+   (3. Nf3 Bg7 4. e3 d6 5. Bd3 O-O 6. c3 Nc6 7. Nbd2 e5 8. dxe5 dxe5 9. Nxe5 Nxe5 10. Bxe5 Qxd3 11. Bxc7 Qb5 12. Qc2 Bf5 13. e4 Nxe4 14. Nxe4 Bxe4 15. Qxe4 Rfe8)
+  3... Bg7)
+2... g6 3. Nc3 Bg7
+ (3... d5 {Grünfeld Defense})
+4. e4
+ (4. Nf3 O-O 5. e4
+   (5. Bg5)
+   (5. e3)
+   (5. Bf4)
+   (5. g3 d6 6. Bg2 Nc6 {Carlsbad Variation}
+    7. O-O Bg4 {Simagin Variation}
+    8. h3 Bxf3 9. Bxf3 Nd7 10. e3
+     (10. d5 Nce5 11. Qb3
+       (11. Bg2)
+       (11. b3 $4 11... Nxf3+ 12. exf3 Bxc3)
+      11... Nc5 12. Qb4
+       (12. Qc2)
+      12... a5 13. Qb5
+       (13. Qa3 Nxc4)
+      13... c6 14. dxc6 bxc6 15. Bxc6 Rb8)
+    10... e5)
+  5... d6)
+4... d6 5. Nf3
+ (5. f4 {Four Pawns Attack})
+ (5. f3 {Sämisch Variation})
+ (5. Be2)
+ (5. Bd3)
+5... O-O 6. Be2
+ (6. Bd3 Bg4 7. O-O Nc6 8. Be3 Nd7 9. h3
+   (9. d5)
+   (9. Be2 Bxf3 10. Bxf3 e5 11. d5 Nd4)
+  9... Bxf3 10. Qxf3 Nxd4 11. Bxd4 Bxd4)
+ (6. h3)
+6... Bg4 7. O-O Nfd7 8. Be3
+ (8. h3 Bxf3 9. Bxf3 Nc6 10. Be3
+   (10. d5 Nd4)
+  10... e5 11. d5
+   (11. dxe5 dxe5 12. Nd5 Nd4)
+  11... Nd4 12. Bxd4 exd4 13. Ne2
+   (13. Nb5)
+  13... d3 14. Qxd3 Bxb2 15. Rab1 Bg7 16. Rxb7 Nc5 17. Qb1 Nxb7 18. Qxb7)
+8... Nc6 *
