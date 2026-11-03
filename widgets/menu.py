@@ -19,14 +19,32 @@ class MenuItem(Label):
 class Menu(Container):
     def add_menu_item(self, text):
         menu_item = MenuItem(self, text)
+        menu_item.draw()
+        menu_item.y = self.height
         self.widgets.append(menu_item)
         return menu_item
+
+    @property
+    def height(self):
+        return sum(w.height for w in self.widgets)
+
+    @property
+    def width(self):
+        return max(w.width for w in self.widgets)
 
 
 class MenuButton(Label):
     def __init__(self, parent, text):
         super().__init__(parent, text)
         self.menu = Menu(self.window)
+
+    def click(self, pos):
+        menu_bar = self.parent
+        if menu_bar.parent.visible_menu is self.menu:
+            menu_bar.parent.visible_menu = None
+        else:
+            menu_bar.parent.visible_menu = self.menu
+            menu_bar.parent.menu_position = (self.x, menu_bar.height)
 
 
 class MenuBar(Container):
