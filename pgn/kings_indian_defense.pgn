@@ -35,7 +35,22 @@
 4... d6 5. Nf3
  (5. f4 {Four Pawns Attack})
  (5. f3 {Sämisch Variation})
- (5. Be2)
+ (5. Be2 O-O 6. Bg5 {Averbakh Variation}
+   (6. Be3 {Semi-Averbakh System})
+   (6. Nf3 {transposes into 5. Nf3 O-O 6. Be2})
+  6... h6 {Flexible Defense}
+   (6... c5 {Benoni Defense (against the Averbakh Variation)}
+    7. d5 {Advance Variation}
+     (7. dxc5 {Exchange Variation})
+    7... e6 {Main Line}
+     (7... h6 {Leelas recommendation}
+      8. Be3 e6 9. Qd2)
+    8. Qd2 exd5 9. exd5)
+   (6... Nbd7 {Geller Defense})
+   (6... Nc6 {Nc6 Defense})
+   (6... Na6 {Modern Defense (against the Averbakh Variation)})
+   (6... a6 {Spanish Defense})
+  7. Be3)
  (5. Bd3)
 5... O-O 6. Be2
  (6. Bd3 Bg4 7. O-O Nc6 8. Be3 Nd7 9. h3

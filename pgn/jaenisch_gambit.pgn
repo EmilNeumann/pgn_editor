@@ -961,6 +961,7 @@
      (8. Qd3)
      (8. Bd2 O-O
        (8... Qe7 9. O-O O-O {transposes into 8... O-O 9. O-O Qe7})
+       (8... d6 {transposes into 7. Bd2 d6 8. Bxc6+ bxc6})
       9. O-O Qe7 10. a3 Bxc3 11. Bxc3 Nxe4 12. Bxe5 d5 13. Qd3 Bg4
       14. Rae1 Bxf3 15. gxf3 Qxe5 16. fxe4 Qxb2 17. exd5 Rad8 18. Qc4 Rxd5
       19. Re6 Qxa3 20. Rxc6 Qf3 21. Qb3 Qh5
@@ -1155,6 +1156,23 @@
   10... O-O)
  (6. Bxc6 bxc6 7. Nxe5
    (7. Nc3 Bb4 {transposes into 6. Nc3 Bb4 7. Bxc6 bxc6})
+   (7. Bg5 Bc5 {this position is more commonly reached by 6. Bg5 Bc5 7. Bxc6 bxc6}
+     (7... Bb4+ $6 8. c3 Bc5 {transposes into 6. Bg5 Bb4+ 7. c3 Bc5 8. Bxc6 bxc6})
+    8. Nxe5 $4
+     (8. O-O d6 9. Nc3 {TODO: transposes into ?}
+       (9. h3 h6 10. Bxf6
+         (10. Bh4 g5 11. Bg3 Nxe4)
+        10... Qxf6)
+       (9. c3 {TODO})
+       (9. Nbd2 {TODO})
+       (9. Bxf6 Qxf6)
+      9... a5 10. Na4 Ba7)
+    8... Bxf2+ $3 9. Kxf2
+     (9. Kf1 O-O)
+    9... Nxe4+ 10. Kg1
+     (10. Ke3 Qxg5+ 11. Kxe4 O-O)
+     (10. Ke1 Qxg5)
+    10... Qxg5 11. Nf3 Qe3+ 12. Kf1 Qf2#)
    (7. O-O d6 {TODO}
      (7... Bc5 {transposes into 6. O-O Bc5 7. Bxc6 bxc6}))
   7... Qe7 8. Nf3
