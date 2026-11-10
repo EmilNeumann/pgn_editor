@@ -15,7 +15,7 @@ import chess.svg
 import pygame
 
 import transpositions
-from treeview import TreeNode
+from widgets.treeview import TreeView, TreeNode, get_lines
 
 
 # BORDER = True
@@ -55,43 +55,6 @@ def get_arrow_color_from_nags(nags: set[int]) -> str:
     return "#ff00ff"
 
 
-def get_text_color_from_nags(nags: set[int]) -> str:
-    """
-    Translate numeric annotation glyphs (NAGs)
-    to colors for pygame.font.Font.render()
-    """
-    if not nags: return "#ffffff"
-    if len(nags) > 1: return "#ff00ff"
-    if chess.pgn.NAG_GOOD_MOVE in nags: return "#00bfff"
-    if chess.pgn.NAG_MISTAKE in nags: return "#ff7f00"
-    if chess.pgn.NAG_BRILLIANT_MOVE in nags: return "#00bfbf"
-    if chess.pgn.NAG_BLUNDER in nags: return "#ff3f00"
-    if chess.pgn.NAG_SPECULATIVE_MOVE in nags: return "#7fff00"
-    if chess.pgn.NAG_DUBIOUS_MOVE in nags: return "#ffdf00"
-    return "#ff00ff"
-
-
-def get_lines(tree_node, indentation):
-    """
-    Group tree nodes into lines:
-    - if a node has no child nodes, the line ends
-    - if a node has only one child node, they should be on the same line
-    - if a node has multiple child nodes, each child node starts a new
-      line with increased indentation
-    """
-    lines = []
-    line = []
-    while len(tree_node.children) == 1:
-        line.append(tree_node)
-        tree_node = tree_node.children[0]
-    line.append(tree_node)
-    lines.append((indentation, line))
-    if tree_node.expanded:
-        for child in tree_node.children:
-            lines.extend(get_lines(child, indentation + 1))
-    return lines
-
-
 class EventHandler:
     """
     Abstract base class.
@@ -117,8 +80,13 @@ class EventHandler:
     def mouse_wheel(self, event):
         if pygame.key.get_mods() & pygame.KMOD_CTRL:
             self.parent.set_font_size(max(1, self.parent.font_size + event.y))
-            self.parent.update_treeview()
+            self.parent.treeview.update()
         else:
+            x, y = pygame.mouse.get_pos()
+            rel_x = x - self.parent.treeview.x
+            rel_y = y - self.parent.treeview.y
+            if rel_x in range(self.parent.treeview.width) and rel_y in range(self.parent.treeview.height):
+                self.parent.treeview.scroll(event.y)
             self.scroll(event)
     
     def scroll(self, event):
@@ -231,14 +199,10 @@ class BoardEventHandler(EventHandler):
         if x in range(BOARD_SIZE) and y in range(BOARD_SIZE):
             self.board_click(x, y)
         if self.show_tree:
-            for node in self.parent.visible_nodes:
-                node_x, node_y = node.position
-                node_y -= self.line_offset * self.parent.char_height
-                if (x - node_x) in range(node.width) and (y - node_y) in range(node.height):
-                    self.parent.selected_node = node
-                    self.active_square = None
-                    break
-            self.parent.update_treeview()
+            rel_x = x - self.parent.treeview.x
+            rel_y = y - self.parent.treeview.y
+            if rel_x in range(self.parent.treeview.width) and rel_y in range(self.parent.treeview.height):
+                self.parent.treeview.click((rel_x, rel_y))
     
     def board_click(self, x, y):
         file_index, rank_index = self.parent.pixel_to_square(x, y)
@@ -286,13 +250,13 @@ class ReplayMode(BoardEventHandler):
             node.expand_all()
         if event.key == pygame.K_MINUS:
             node.collapse_all()
-        self.parent.update_treeview()
+        self.parent.treeview.update()
     
     def process_move(self, move):
         for child_node in self.parent.selected_node.children:
             if child_node.game_node.move == move:
                 self.parent.selected_node = child_node
-                self.parent.update_treeview()
+                self.parent.treeview.update()
                 break
     
     def get_info(self) -> str:
@@ -368,12 +332,14 @@ class Window:
         self.font = pygame.font.SysFont(FONT, self.font_size)
         self.char_width, self.char_height = self.font.size(" ")
         self.orientation = chess.WHITE
-        self.root = None
         self.mode = FileSelectorMode(self)
         self.mode.update_list()
         self.visible_nodes = []
-        self.selected_node = self.root
-        self.treeview_pos = (BOARD_SIZE + BORDER_SIZE, 0)
+        self.selected_node = None
+        self.treeview = TreeView(self, None)
+        self.treeview.x = BOARD_SIZE + BORDER_SIZE
+        self.treeview.width = 700 - BORDER_SIZE
+        self.treeview.height = BOARD_SIZE + 500
     
     def mainloop(self):
         clock = pygame.time.Clock()
@@ -388,6 +354,8 @@ class Window:
                     self.mode.mouse_button_down(event)
                 if event.type == pygame.MOUSEWHEEL:
                     self.mode.mouse_wheel(event)
+                if event.type == pygame.WINDOWSIZECHANGED:
+                    self.window_size_changed(event)
             self.draw()
             pygame.display.flip()
             clock.tick(60)
@@ -424,7 +392,8 @@ class Window:
         if self.mode.show_board:
             self.draw_board()
             if self.mode.show_tree:
-                self.draw_tree_view()
+                self.treeview.draw()
+                self.surface.blit(self.treeview.surface, self.treeview.position)
             if self.mode.show_move_list:
                 self.draw_move_list()
             self.draw_info()
@@ -512,29 +481,6 @@ class Window:
                 (0, BOARD_SIZE + BORDER_SIZE + self.char_height * i)
             )
     
-    def draw_tree_view(self):
-        for node in self.visible_nodes:
-            background = "#000000"
-            if node is self.selected_node:
-                background = "#0000ff"
-            elif node.fen == self.selected_node.fen:
-                background = "#7f007f"
-            elif self.selected_node.is_descendant(node):
-                background = "#00007f"
-            elif node.game_node.comment:
-                background = "#3f3f3f"
-            text_surface = self.font.render(
-                node.text,
-                False,
-                get_text_color_from_nags(node.game_node.nags),
-                background
-            )
-            position = (
-                node.position[0],
-                node.position[1] - self.mode.line_offset * self.char_height
-            )
-            self.surface.blit(text_surface, position)
-    
     def get_arrows(self) -> list:
         if not self.mode.show_arrows:
             return []
@@ -581,7 +527,7 @@ class Window:
     
     def exit_practice_mode(self):
         self.mode = ReplayMode(self)
-        self.update_treeview()
+        self.treeview.update()
     
     def set_font_size(self, font_size):
         self.font_size = font_size
@@ -589,12 +535,16 @@ class Window:
         self.char_width, self.char_height = self.font.size(" ")
     
     def set_game(self, game):
-        self.root = TreeNode(game, None)
-        self.selected_node = self.root
+        self.treeview.root = TreeNode(game, None)
+        self.selected_node = self.treeview.root
         self.mode = ReplayMode(self)
-        self.update_treeview()
+        self.treeview.update()
         if game.headers["Black"] == PLAYER_NAME:
             self.orientation = chess.BLACK
+
+    def window_size_changed(self, event):
+        self.treeview.width = event.x - (BOARD_SIZE + BORDER_SIZE)
+        self.treeview.height = event.y
 
 
 def main():

@@ -28,3 +28,25 @@ class Label(Widget):
         self.surface = pygame.Surface(self.size)
         self.surface.fill(self.background)
         self.surface.blit(self.text_surface, (self.margin, self.margin))
+
+
+class Scrollable(Widget):
+    def __init__(self, parent):
+        super().__init__(parent)
+        self.line_count = 0
+        self.line_offset = 0
+
+    @property
+    def max_visible_lines(self):
+        return self.height // self.window.char_height
+
+    def scroll(self, y):
+        self.line_offset -= y * 3
+        self.clip_offset()
+
+    def clip_offset(self):
+        self.line_offset = min(
+            self.line_offset,
+            self.line_count - self.max_visible_lines
+        )
+        self.line_offset = max(0, self.line_offset)
