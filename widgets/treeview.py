@@ -61,6 +61,11 @@ class TreeView(Scrollable):
         super().__init__(parent)
         self.root: TreeNode = root
         self.visible_nodes: list[TreeNode] = []
+        self._line_count = 0
+
+    @property
+    def line_count(self):
+        return self._line_count
 
     @property
     def selected_node(self):
@@ -97,7 +102,7 @@ class TreeView(Scrollable):
         self.visible_nodes.clear()
         self.selected_node.make_visible()
         lines = get_lines(self.root, 0)
-        self.line_count = len(lines)
+        self._line_count = len(lines)
         for line_index, line in enumerate(lines):
             indentation, tree_nodes = line
             y = line_index * self.window.char_height
