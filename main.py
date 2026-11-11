@@ -338,8 +338,8 @@ class Window:
         self.selected_node = None
         self.treeview = TreeView(self, None)
         self.treeview.x = BOARD_SIZE + BORDER_SIZE
-        self.treeview.width = 700 - BORDER_SIZE
-        self.treeview.height = BOARD_SIZE + 500
+        self.treeview.width = self.surface.get_width() - self.treeview.x
+        self.treeview.height = self.surface.get_height()
     
     def mainloop(self):
         clock = pygame.time.Clock()
@@ -543,7 +543,7 @@ class Window:
             self.orientation = chess.BLACK
 
     def window_size_changed(self, event):
-        self.treeview.width = event.x - (BOARD_SIZE + BORDER_SIZE)
+        self.treeview.width = event.x - self.treeview.x
         self.treeview.height = event.y
 
 
