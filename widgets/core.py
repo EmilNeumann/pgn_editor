@@ -33,8 +33,11 @@ class Label(Widget):
 class Scrollable(Widget):
     def __init__(self, parent):
         super().__init__(parent)
-        self.line_count = 0
         self.line_offset = 0
+
+    @property
+    def line_count(self):
+        return 0
 
     @property
     def max_visible_lines(self):
@@ -50,3 +53,32 @@ class Scrollable(Widget):
             self.line_count - self.max_visible_lines
         )
         self.line_offset = max(0, self.line_offset)
+
+
+class ListBox(Scrollable):
+    def __init__(self, parent, items: list[str]):
+        super().__init__(parent)
+        self.items = items.copy()
+        self.selected_index: int = 0
+
+    @property
+    def line_count(self):
+        return len(self.items)
+
+    def draw(self):
+        super().draw()
+        for i, line in enumerate(self.items):
+            background = "#000000"
+            if i == self.selected_index:
+                background = "#0000ff"
+            text_surface = self.window.font.render(
+                line.encode('latin-1'),
+                False, "#ffffff", background
+            )
+            y = (i - self.line_offset) * self.window.char_height
+            self.surface.blit(text_surface, (0, y))
+
+    def click(self, pos):
+        index = pos[1] // self.window.char_height + self.line_offset
+        if index < len(self.items):
+            self.selected_index = index
