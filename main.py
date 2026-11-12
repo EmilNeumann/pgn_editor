@@ -15,7 +15,7 @@ import chess.svg
 import pygame
 
 import transpositions
-from widgets.treeview import TreeView, TreeNode, get_lines
+from widgets.treeview import TreeView, TreeNode
 
 
 # BORDER = True
@@ -359,31 +359,6 @@ class Window:
             self.draw()
             pygame.display.flip()
             clock.tick(60)
-    
-    def update_treeview(self):
-        """
-        Determine which nodes are visible and where they are.
-        """
-        self.visible_nodes.clear()
-        self.selected_node.make_visible()
-        lines = get_lines(self.root, 0)
-        self.mode.line_count = len(lines)
-        offset_x, offset_y = self.treeview_pos
-        for line_index, line in enumerate(lines):
-            indentation, tree_nodes = line
-            y = offset_y + line_index * self.char_height
-            x = offset_x + indentation * 2 * self.char_width
-            for tree_node in tree_nodes:
-                tree_node.position = (x, y)
-                tree_node.text = tree_node.base_text
-                if not tree_node.expanded and len(tree_node.children) > 1:
-                    tree_node.text += f" ({len(tree_node.children)}"
-                    tree_node.text += f"/{tree_node.get_subtree_lines()}/"
-                    tree_node.text += f"{tree_node.get_subtree_size()})"
-                tree_node.width = len(tree_node.text) * self.char_width
-                tree_node.height = self.char_height
-                self.visible_nodes.append(tree_node)
-                x += tree_node.width + self.char_width
     
     def draw(self):
         self.surface.fill("#000000")  # clear
