@@ -123,7 +123,7 @@ class TabBar(Container):
     def select_tab(self, tab_control):
         self.selected_tab_index = self.widgets.index(tab_control)
     
-    def add_tab_control(self, text, tab, with_close_button=True):
+    def add_tab_control(self, text, tab, with_close_button):
         tab_control = TabControl(self, text, tab, with_close_button)
         self.widgets.append(tab_control)
         return tab_control
@@ -175,7 +175,8 @@ class TabView(Container):
                 self.selected_tab.hover((x, y - self.tab_bar.height))
             self.tab_bar.leave()
     
-    def add_tab(self, text) -> Tab:
-        tab = Tab(self)
-        self.tab_bar.add_tab_control(text, tab)
+    def add_tab(self, text, tab=None, *, with_close_button=True) -> Tab:
+        if tab is None:
+            tab = Tab(self)
+        self.tab_bar.add_tab_control(text, tab, with_close_button)
         return tab

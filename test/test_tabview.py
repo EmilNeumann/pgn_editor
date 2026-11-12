@@ -3,7 +3,7 @@
 
 import pygame
 
-from widgets.tabview import TabView, Tab
+from widgets.tabview import TabView
 
 
 SIZE = 300
@@ -24,16 +24,8 @@ class Window:
         tab1_tab_view.width = tab1.width
         tab1_tab_view.height = tab1.height
         tab1.widgets.append(tab1_tab_view)
-        games_tab = Tab(tab1_tab_view)
-        tab1_tab_view.tab_bar.add_tab_control(
-            "Games", games_tab,
-            with_close_button=False
-        )
-        headers_tab = Tab(tab1_tab_view)
-        tab1_tab_view.tab_bar.add_tab_control(
-            "Headers", headers_tab,
-            with_close_button=False
-        )
+        tab1_tab_view.add_tab("Games", with_close_button=False)
+        tab1_tab_view.add_tab("Headers", with_close_button=False)
         self.tab_view.add_tab("Tab 2")
     
     def mainloop(self):
