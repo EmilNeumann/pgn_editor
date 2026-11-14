@@ -40,4 +40,26 @@
   9. h4 Nbd7
    (9... Be4)
   10. Nxd7 Nxd7 11. h5 Be4 12. O-O Bd5 13. Nxd5 cxd5 14. Bd3 Bd6 15. Qf3)
-6. h3 *
+6. h3 {Lasker Variation}
+6... Bh5
+ (6... Bxf3 7. Qxf3 c6
+   (7... Nc6 $2 8. Bb5 O-O-O
+     (8... Qb6 $4 9. d5 a6 10. Be3 Qa5 11. dxc6 axb5 12. cxb7 Rb8 13. Qc6+ Nd7
+       (13... Kd8 $2 14. O-O-O+ Nd7
+         (14... Nd5 15. Rxd5#)
+        15. Qxd7#)
+      14. O-O-O Rd8 $2 15. Qxd7+ Rxd7 16. b8=Q+ Rd8 17. Qxd8#
+       (17. Rxd8#))
+    9. Bxc6 bxc6 10. Qxc6 Rxd4 11. Qa8+ Kd7 12. Be3)
+   (7... e6 $4 8. Qxb7 Bb4 9. Qxa8 Bxc3+
+     (9... O-O 10. Qf3)
+    10. bxc3 Qxc3+ 11. Kd1 $1)
+  8. Bd2)
+ (6... Qh5 $4 7. hxg4 Qxh1 8. Ne2 Nxg4
+   (8... Ne4 9. Qd3 f5 10. gxf5 Nxf2
+     (10... Qh5 11. Qxe4)
+    11. Kxf2 Qh5 12. Nf4 Qf7
+     (12... Qg4 13. Ne5 Qh4+ 14. g3 Qh2+ 15. Bg2)
+    13. -- {TODO: decide between Qb5+ and Ne6})
+  9. Ng3)
+7. g4 Bg6 8. Ne5 {TODO} *
