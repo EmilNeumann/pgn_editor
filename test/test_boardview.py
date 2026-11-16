@@ -1,6 +1,9 @@
 # coding: utf-8
 
 
+import datetime
+import os.path
+
 import chess
 import chess.pgn
 import pygame
@@ -16,7 +19,16 @@ class Window:
     def __init__(self):
         self.surface = pygame.display.set_mode((SIZE, SIZE), flags=pygame.RESIZABLE)
         self.font = pygame.font.SysFont("sourcecodepro", 16)
-        self.game = chess.pgn.Game()
+        today = datetime.date.today()
+        filename = f'{today}.pgn'
+        path = os.path.join('pgn', filename)
+        if os.path.exists(path):
+            with open(os.path.join('pgn', filename)) as f:
+                self.game = chess.pgn.read_game(f)
+            pygame.display.set_caption(filename)
+        else:
+            self.game = chess.pgn.Game()
+            pygame.display.set_caption("New Game")
         self.selected_node = TreeNode(self.game, None)
         self.show_arrows = True
         self.board_view = BoardView(self)
@@ -57,6 +69,19 @@ class Window:
                 self.selected_node = self.selected_node.children[0]
         if event.key == pygame.K_f:
             self.board_view.orientation = not self.board_view.orientation
+        if event.key == pygame.K_s:
+            today = datetime.date.today()
+            filename = f"{today}.pgn"
+            with open(os.path.join('pgn', filename), 'w') as f:
+                self.game.accept(chess.pgn.FileExporter(f))
+            pygame.display.set_caption(f"saved {filename}")
+        if event.key == pygame.K_BACKSPACE or event.key == pygame.K_DELETE:
+            if self.selected_node.parent is not None:
+                node = self.selected_node
+                self.selected_node = node.parent
+                self.selected_node.children.remove(node)
+                self.selected_node.game_node.variations.remove(node.game_node)
+                pygame.display.set_caption("changed")
 
     def process_move(self, move):
         for child_node in self.selected_node.children:
@@ -70,6 +95,7 @@ class Window:
                 child_tree_node = TreeNode(child_game_node, self.selected_node)
                 self.selected_node.children.append(child_tree_node)
                 self.selected_node = child_tree_node
+                pygame.display.set_caption("changed")
 
 
 def main():
