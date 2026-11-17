@@ -162,7 +162,7 @@ class FileSelectorMode(EventHandler):
                 print("selection type is GAMES but file_path is None")
                 return
             self.games.clear()
-            with open(self.file_path) as f:
+            with open(self.file_path, encoding='utf-8') as f:
                 while (game := chess.pgn.read_game(f)) is not None:
                     self.games.append(game)
                     self.str_items.append(self.game_to_str(game))
@@ -446,7 +446,7 @@ class Window:
         max_line_length = BOARD_SIZE // self.char_width
         for i, line in enumerate(textwrap.wrap(text, max_line_length)):
             comment_surface = self.font.render(
-                line.encode('latin-1'),
+                line,
                 False,
                 "#ffffff",
                 "#000000"

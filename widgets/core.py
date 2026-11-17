@@ -18,7 +18,7 @@ class Label(Widget):
     
     def draw(self):
         self.text_surface = self.window.font.render(
-            self.text.encode('latin-1'), False,
+            self.text, False,
             self.text_color, self.background
         )
         self.min_width = self.text_surface.get_width() + self.margin * 2
@@ -72,7 +72,7 @@ class ListBox(Scrollable):
             if i == self.selected_index:
                 background = "#0000ff"
             text_surface = self.window.font.render(
-                line.encode('latin-1'),
+                line,
                 False, "#ffffff", background
             )
             y = (i - self.line_offset) * self.window.char_height
