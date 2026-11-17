@@ -81,7 +81,7 @@ class BoardView(Widget):
             arrows=self.get_arrows(),
             fill={self.active_square: "#ff800080"},
             size=self.width,
-            borders=self.border
+            coordinates=self.border
         )
         buffer = io.BytesIO(board_svg.encode())
         board_surface = pygame.image.load(buffer)
