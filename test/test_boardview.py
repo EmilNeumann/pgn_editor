@@ -54,11 +54,9 @@ class Window:
         self.surface.blit(self.board_view.surface, self.board_view.position)
 
     def mouse_button_down(self, event):
-        x, y = event.pos
-        rel_x = x - self.board_view.x
-        rel_y = y - self.board_view.y
-        if rel_x in range(self.board_view.width) and rel_y in range(self.board_view.height):
-            self.board_view.click((rel_x, rel_y))
+        rel_pos = self.board_view.get_relative(event.pos)
+        if rel_pos in self.board_view:
+            self.board_view.click(rel_pos)
 
     def key_down(self, event):
         if event.key == pygame.K_LEFT:

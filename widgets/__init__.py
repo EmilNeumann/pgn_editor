@@ -15,6 +15,10 @@ class Widget:
         self._width = 0
         self._height = 0
         self._background = "#000000"
+
+    def __contains__(self, pos) -> bool:
+        """check if the relative position is contained in this widget"""
+        return pos[0] in range(self.width) and pos[1] in range(self.height)
     
     @property
     def x(self): return self._x
@@ -59,6 +63,11 @@ class Widget:
     @background.setter
     def background(self, _background):
         self._background = _background
+
+    def get_relative(self, pos) -> tuple[int, int]:
+        rel_x = pos[0] - self.x
+        rel_y = pos[1] - self.y
+        return rel_x, rel_y
     
     def draw(self):
         self.surface = pygame.Surface(self.size)
@@ -79,7 +88,7 @@ class Container(Widget):
     """
     def __init__(self, parent):
         super().__init__(parent)
-        self.widgets = []
+        self.widgets: list[Widget] = []
     
     def draw(self):
         super().draw()
@@ -88,21 +97,17 @@ class Container(Widget):
             self.surface.blit(widget.surface, widget.position)
     
     def click(self, pos):
-        x, y = pos
         for widget in self.widgets:
-            rel_x = x - widget.x
-            rel_y = y - widget.y
-            if rel_x in range(widget.width) and rel_y in range(widget.height):
-                widget.click((rel_x, rel_y))
+            rel_pos = widget.get_relative(pos)
+            if rel_pos in widget:
+                widget.click(rel_pos)
     
     def hover(self, pos):
         super().hover(pos)
-        x, y = pos
         for widget in self.widgets:
-            rel_x = x - widget.x
-            rel_y = y - widget.y
-            if rel_x in range(widget.width) and rel_y in range(widget.height):
-                widget.hover((rel_x, rel_y))
+            rel_pos = widget.get_relative(pos)
+            if rel_pos in widget:
+                widget.hover(rel_pos)
             else:
                 widget.leave()
     

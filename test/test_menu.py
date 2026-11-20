@@ -75,12 +75,11 @@ class Window:
             if event.pos[1] <= self.menu_bar.height:
                 self.menu_bar.click(event.pos)
             elif self.visible_menu is not None:
-                rel_x = event.pos[0] - self.visible_menu.x
-                rel_y = event.pos[1] - self.visible_menu.y
-                if rel_x in range(self.visible_menu.width) and rel_y in range(self.visible_menu.height):
-                    self.visible_menu.click((rel_x, rel_y))
+                rel_pos = self.visible_menu.get_relative(event.pos)
+                if rel_pos in self.visible_menu:
+                    self.visible_menu.click(rel_pos)
             else:
-                pass  # TODO: call .click(event.pos) on the clicked widget
+                pass  # call .click(event.pos) on the clicked widget
 
     def mouse_motion(self, event):
         if event.pos[1] <= self.menu_bar.height:
@@ -88,10 +87,9 @@ class Window:
         else:
             self.menu_bar.leave()
         if self.visible_menu is not None:
-            rel_x = event.pos[0] - self.visible_menu.x
-            rel_y = event.pos[1] - self.visible_menu.y
-            if rel_x in range(self.visible_menu.width) and rel_y in range(self.visible_menu.height):
-                self.visible_menu.hover((rel_x, rel_y))
+            rel_pos = self.visible_menu.get_relative(event.pos)
+            if rel_pos in self.visible_menu:
+                self.visible_menu.hover(rel_pos)
             else:
                 self.visible_menu.leave()
 

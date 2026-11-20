@@ -42,10 +42,9 @@ class Window:
 
     def mouse_button_down(self, event):
         if event.button == 1:
-            rel_x = event.pos[0] - self.listbox.x
-            rel_y = event.pos[1] - self.listbox.y
-            if rel_x in range(self.listbox.width) and rel_y in range(self.listbox.height):
-                self.listbox.click((rel_x, rel_y))
+            rel_pos = self.listbox.get_relative(event.pos)
+            if rel_pos in self.listbox:
+                self.listbox.click(rel_pos)
 
     def mouse_wheel(self, event):
         self.listbox.scroll(event.y)
