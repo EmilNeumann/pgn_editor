@@ -15,6 +15,7 @@ import chess.svg
 import pygame
 
 import transpositions
+from widgets.boardview import BoardView
 from widgets.treeview import TreeView, TreeNode
 
 
@@ -195,29 +196,13 @@ class BoardEventHandler(EventHandler):
     def mouse_button_down(self, event):
         if event.button != 1:
             return  # for now, only left clicks are handled
-        x, y = event.pos
-        if x in range(BOARD_SIZE) and y in range(BOARD_SIZE):
-            self.board_click(x, y)
+        rel_pos = self.parent.boardview.get_relative(event.pos)
+        if rel_pos in self.parent.boardview:
+            self.parent.boardview.click(rel_pos)
         if self.show_tree:
-            rel_x = x - self.parent.treeview.x
-            rel_y = y - self.parent.treeview.y
-            if rel_x in range(self.parent.treeview.width) and rel_y in range(self.parent.treeview.height):
-                self.parent.treeview.click((rel_x, rel_y))
-    
-    def board_click(self, x, y):
-        file_index, rank_index = self.parent.pixel_to_square(x, y)
-        if not (file_index in range(8) and rank_index in range(8)):
-            return  # the click was on the border
-        square = chess.square(file_index, rank_index)
-        if self.active_square is None:
-            self.active_square = square
-            return
-        if self.active_square == square:
-            self.active_square = None
-            return
-        move = chess.Move(self.active_square, square)
-        self.active_square = None
-        self.process_move(move)
+            rel_pos = self.parent.treeview.get_relative(event.pos)
+            if rel_pos in self.parent.treeview:
+                self.parent.treeview.click(rel_pos)
     
     def process_move(self, move):
         pass
@@ -336,10 +321,15 @@ class Window:
         self.mode.update_list()
         self.visible_nodes = []
         self.selected_node = None
+        self.boardview = BoardView(self)
         self.treeview = TreeView(self, None)
-        self.treeview.x = BOARD_SIZE + BORDER_SIZE
+        self.treeview.x = self.boardview.width + BORDER_SIZE
         self.treeview.width = self.surface.get_width() - self.treeview.x
         self.treeview.height = self.surface.get_height()
+
+    @property
+    def show_arrows(self) -> bool:
+        return self.mode.show_arrows
     
     def mainloop(self):
         clock = pygame.time.Clock()
@@ -365,7 +355,8 @@ class Window:
         if self.mode.show_list:
             self.draw_list()
         if self.mode.show_board:
-            self.draw_board()
+            self.boardview.draw()
+            self.surface.blit(self.boardview.surface, self.boardview.position)
             if self.mode.show_tree:
                 self.treeview.draw()
                 self.surface.blit(self.treeview.surface, self.treeview.position)
@@ -386,31 +377,6 @@ class Window:
                 text_surface,
                 (0, (i - self.mode.line_offset) * self.char_height)
             )
-    
-    def draw_board(self):
-        board = self.selected_node.game_node.board()
-        board_svg = chess.svg.board(
-            board,
-            orientation=self.orientation,
-            arrows=self.get_arrows(),
-            fill={self.mode.active_square: "#ff800080"},
-            size=BOARD_SIZE
-        )
-        buffer = io.BytesIO(board_svg.encode())
-        board_surface = pygame.image.load(buffer)
-        self.surface.blit(board_surface, (0, 0))
-        # the board SVG already defines the pieces, but uses references
-        # to define their positions. pygame / SDL is apparently unable to
-        # handle these references, so this function needs to loop over
-        # the board and blit the pieces manually
-        for file_index, rank_index in itertools.product(range(8), repeat=2):
-            square = chess.square(file_index, rank_index)
-            piece = board.piece_at(square)
-            if piece is None:
-                continue
-            piece_surface = get_piece_surface(piece.piece_type, piece.color)
-            pos = self.square_to_pixel(file_index, rank_index)
-            self.surface.blit(piece_surface, pos)
     
     def draw_move_list(self):
         pgn = str(chess.pgn.Game.from_board(
@@ -456,49 +422,15 @@ class Window:
                 (0, BOARD_SIZE + BORDER_SIZE + self.char_height * i)
             )
     
-    def get_arrows(self) -> list:
-        if not self.mode.show_arrows:
-            return []
-        if len(self.selected_node.children) <= 1:
-            return []
-        arrows = []
-        for child_node in self.selected_node.children:
-            arrows.append(
-                chess.svg.Arrow(
-                    child_node.game_node.move.from_square,
-                    child_node.game_node.move.to_square,
-                    color=get_arrow_color_from_nags(child_node.game_node.nags)
-                )
-            )
-        return arrows
-    
     def flip_board(self):
-        self.orientation = not self.orientation
+        self.boardview.orientation = not self.boardview.orientation
     
     def make_random_move(self):
         if self.selected_node.children:
             self.selected_node = random.choice(self.selected_node.children)
     
-    def square_to_pixel(self, file_index, rank_index):
-        if self.orientation:
-            rank_index = 7 - rank_index
-        else:
-            file_index = 7 - file_index
-        x = BORDER_SIZE + SQUARE_SIZE*file_index
-        y = BORDER_SIZE + SQUARE_SIZE*rank_index
-        return x, y
-    
-    def pixel_to_square(self, x, y):
-        file_index = (x - BORDER_SIZE) // SQUARE_SIZE
-        rank_index = (y - BORDER_SIZE) // SQUARE_SIZE
-        if self.orientation:
-            rank_index = 7 - rank_index
-        else:
-            file_index = 7 - file_index
-        return file_index, rank_index
-    
     def enter_practice_mode(self):
-        self.mode = PracticeMode(self, self.orientation)
+        self.mode = PracticeMode(self, self.boardview.orientation)
     
     def exit_practice_mode(self):
         self.mode = ReplayMode(self)
@@ -515,11 +447,14 @@ class Window:
         self.mode = ReplayMode(self)
         self.treeview.update()
         if game.headers["Black"] == PLAYER_NAME:
-            self.orientation = chess.BLACK
+            self.boardview.orientation = chess.BLACK
 
     def window_size_changed(self, event):
         self.treeview.width = event.x - self.treeview.x
         self.treeview.height = event.y
+
+    def process_move(self, move):
+        self.mode.process_move(move)
 
 
 def main():
