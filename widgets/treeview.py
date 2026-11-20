@@ -130,7 +130,7 @@ class TreeView(Scrollable):
 
 
 class TreeNode:
-    def __init__(self, game_node, parent):
+    def __init__(self, game_node: chess.pgn.GameNode, parent):
         self.game_node = game_node
         self.parent: TreeNode | None = parent
         self.expanded: bool = False

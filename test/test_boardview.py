@@ -12,7 +12,7 @@ from widgets.boardview import BoardView
 from widgets.treeview import TreeNode
 
 
-SIZE = 400
+SIZE = 390
 
 
 class Window:
@@ -23,7 +23,7 @@ class Window:
         filename = f'{today}.pgn'
         path = os.path.join('pgn', filename)
         if os.path.exists(path):
-            with open(os.path.join('pgn', filename)) as f:
+            with open(os.path.join('pgn', filename), encoding='utf-8') as f:
                 self.game = chess.pgn.read_game(f)
             pygame.display.set_caption(filename)
         else:

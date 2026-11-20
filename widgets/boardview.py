@@ -10,6 +10,7 @@ import chess.svg
 import pygame
 
 from . import Widget
+from .treeview import TreeNode
 
 
 BORDER_SIZE = 15
@@ -69,7 +70,7 @@ class BoardView(Widget):
         self.orientation = chess.WHITE
 
     @property
-    def selected_node(self):
+    def selected_node(self) -> TreeNode:
         return self.parent.selected_node
 
     def draw(self):
